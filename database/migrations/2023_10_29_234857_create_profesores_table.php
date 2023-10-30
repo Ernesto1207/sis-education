@@ -13,13 +13,18 @@ return new class extends Migration
     {
         Schema::create('profesores', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
-            $table->string('apellido');
-            $table->string('dni')->unique();
+            $table->unsignedBigInteger('user_id');
+            $table->string('dni', 15)->unique();
+            $table->string('nombres', 100);
+            $table->string('apellido_paterno', 50);
+            $table->string('apellido_materno', 50)->nullable();
+            $table->enum('genero', ['Masculino', 'Femenino']);
             $table->string('email')->unique();
             $table->string('telefono')->unique();
             $table->date('fecha_nacimiento');
-            $table->string('genero');
+            $table->string('ciudad', 100);
+            $table->string('direccion', 200);
+            $table->enum('estado', ['Activo', 'Inactivo']);
             $table->timestamps();
         });
     }

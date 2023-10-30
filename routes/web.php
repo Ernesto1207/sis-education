@@ -7,6 +7,7 @@ use App\Http\Controllers\AsistenciaController;
 use App\Http\Controllers\CursoController;
 use App\Http\Controllers\NotaController;
 use App\Http\Controllers\PermisosController;
+use App\Http\Controllers\ProfesoresController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UsuariosController;
 use App\Models\AsignacionesCurso;
@@ -33,6 +34,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
         return view('dashboard');
     })->name('dashboard');
     Route::resource('/alumnos', AlumnoController::class)->names('alumnos');
+
+    Route::resource('/profesores', ProfesoresController::class)->names('profesores');
 
     Route::resource('/usuarios', UsuariosController::class)->names('usuarios');
 

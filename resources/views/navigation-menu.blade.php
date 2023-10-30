@@ -427,15 +427,56 @@
                         </a>
                     </li>
                     <!-- end::Submenu link -->
-                <!-- start::Submenu link -->
-                <li
-                    class="pl-10 pr-6 py-2 cursor-pointer hover:bg-black hover:bg-opacity-30 transition duration-200 hover:text-gray-100">
-                    <a href="{{route('cursos.index')}}" class="flex items-center">
-                        <span class="mr-2 text-sm">&bull;</span>
-                        <span class="overflow-ellipsis">View Cursos</span>
-                    </a>
-                </li>
-                <!-- end::Submenu link -->
+                    <!-- start::Submenu link -->
+                    <li
+                        class="pl-10 pr-6 py-2 cursor-pointer hover:bg-black hover:bg-opacity-30 transition duration-200 hover:text-gray-100">
+                        <a href="{{ route('cursos.index') }}" class="flex items-center">
+                            <span class="mr-2 text-sm">&bull;</span>
+                            <span class="overflow-ellipsis">View Cursos</span>
+                        </a>
+                    </li>
+                    <!-- end::Submenu link -->
+                </ul>
+                <!-- end::Submenu -->
+            </div>
+        @endcan
+        <!-- end::Menu link -->
+
+        <!-- start::Menu link -->
+        @can('administrador')
+            <div x-data="{ linkHover: false, linkActive: false }">
+                <div @mouseover="linkHover = true" @mouseleave="linkHover = false" @click="linkActive = !linkActive"
+                    class="flex items-center justify-between text-gray-400 hover:text-gray-100 px-6 py-3 cursor-pointer hover:bg-black hover:bg-opacity-30 transition duration-200"
+                    :class="linkActive ? 'bg-black bg-opacity-30 text-gray-100' : ''">
+                    <div class="flex items-center">
+                        <span class="ml-3">Profesores</span>
+                    </div>
+                    <svg class="w-3 h-3 transition duration-300" :class="linkActive ? 'rotate-90' : ''" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                        </path>
+                    </svg>
+                </div>
+                <!-- start::Submenu -->
+                <ul x-show="linkActive" x-cloak x-collapse.duration.300ms class="text-gray-400">
+                    <!-- start::Submenu link -->
+                    <li
+                        class="pl-10 pr-6 py-2 cursor-pointer hover:bg-black hover:bg-opacity-30 transition duration-200 hover:text-gray-100">
+                        <a href="{{ route('profesores.index') }}" class="flex items-center">
+                            <span class="mr-2 text-sm">&bull;</span>
+                            <span class="overflow-ellipsis">Ver Profesores</span>
+                        </a>
+                    </li>
+                    <!-- end::Submenu link -->
+                    {{-- <!-- start::Submenu link -->
+                    <li
+                        class="pl-10 pr-6 py-2 cursor-pointer hover:bg-black hover:bg-opacity-30 transition duration-200 hover:text-gray-100">
+                        <a href="{{ route('cursos.index') }}" class="flex items-center">
+                            <span class="mr-2 text-sm">&bull;</span>
+                            <span class="overflow-ellipsis">View Cursos</span>
+                        </a>
+                    </li>
+                    <!-- end::Submenu link --> --}}
                 </ul>
                 <!-- end::Submenu -->
             </div>
@@ -472,13 +513,13 @@
                     <!-- start::Submenu link -->
                     <li
                         class="pl-10 pr-6 py-2 cursor-pointer hover:bg-black hover:bg-opacity-30 transition duration-200 hover:text-gray-100">
-                        <a href="{{route('asistencia.index')}}" class="flex items-center">
+                        <a href="{{ route('asistencia.index') }}" class="flex items-center">
                             <span class="mr-2 text-sm">&bull;</span>
                             <span class="overflow-ellipsis">Ver Asistencias</span>
                         </a>
                     </li>
                     <!-- end::Submenu link -->
-                    
+
                 </ul>
                 <!-- end::Submenu -->
             </div>
