@@ -541,8 +541,6 @@
         </a>
         <!-- end::Menu link -->
 
-
-
         {{-- <p class="text-xs text-gray-600 mt-10 mb-2 px-6 uppercase">Components</p> --}}
 
     </nav>
