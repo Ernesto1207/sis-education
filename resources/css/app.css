@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+[x-cloak] {
+    display: none;
+}
+
+input[type=number] {
+    -webkit-appearance: textfield;
+    /* Para navegadores basados en WebKit */
+    appearance: textfield;
+    /* Para navegadores compatibles con el estándar */
+}
