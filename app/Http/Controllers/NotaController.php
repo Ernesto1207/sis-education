@@ -27,6 +27,7 @@ class NotaController extends Controller
     public function create()
     {
         //
+        return ('hola mundo');
         
     }
 
