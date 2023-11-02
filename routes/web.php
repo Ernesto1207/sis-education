@@ -61,10 +61,5 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::post('/validar-dni', [NotaController::class, 'validarDNI'])->name('dni.validar');
     Route::post('/asignar-nota', [NotaController::class, 'store'])->name('asignar-nota');
 
-    Route::get('/perfil', [PerfilController::class,'show'])->name('perfil.mostrar');
-    
-
-    // Route::get('dashboard/asignar-nota', [NotaController::class, 'asignarForm'])->name('nota.asignar.form');
-
-    // Route::post('dashboard/asignar-nota', [NotaController::class, 'store'])->name('nota.asignar.store');
+    Route::get('/perfil', [PerfilController::class, 'show'])->name('perfil.mostrar');
 });

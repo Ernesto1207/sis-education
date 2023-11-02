@@ -37,7 +37,7 @@
                         {{ Auth::user()->email }}
                     @endif
                     @if ($profesor)
-                        {{Auth::user()->email}}
+                        {{ Auth::user()->email }}
                     @endif
                 </p>
                 <p class="text-sm text-gray-500">
@@ -73,42 +73,104 @@
                     </button>
                 </div>
             </div> --}}
-            
+
         </div>
 
         <div class="my-4 flex flex-col 2xl:flex-row space-y-4 2xl:space-y-0 2xl:space-x-4">
             <div class="w-full flex flex-col 2xl:w-1/3">
                 <div class="flex-1 bg-white rounded-lg shadow-xl p-8">
-                    <h4 class="text-xl text-gray-900 font-bold">Personal Info</h4>
+                    <h4 class="text-xl text-gray-900 font-bold">Información personal</h4>
                     <ul class="mt-2 text-gray-700">
                         <li class="flex border-y py-2">
-                            <span class="font-bold w-24">Full name:</span>
-                            <span class="text-gray-700">Amanda S. Ross</span>
+                            <span class="font-bold w-36">Datos Completos: </span>
+                            <span class="text-gray-700">
+                                @if ($alumnos)
+                                    {{ ucfirst($alumnos->nombres) }}
+                                    {{ ucfirst($alumnos->apellido_paterno) }}
+                                    {{ ucfirst($alumnos->apellido_materno) }}
+                                @endif
+                                @if ($profesor)
+                                    {{ ucfirst($profesor->nombres) }}
+                                    {{ ucfirst($profesor->apellido_paterno) }}
+                                    {{ ucfirst($profesor->apellido_materno) }}
+                                @endif
+                            </span>
                         </li>
                         <li class="flex border-b py-2">
-                            <span class="font-bold w-24">Birthday:</span>
-                            <span class="text-gray-700">24 Jul, 1991</span>
+                            <span class="font-bold w-36">Cumpleaños:</span>
+                            <span class="text-gray-700">
+                                @if ($alumnos)
+                                    <?php
+                                    $fechaOriginal = ucfirst($alumnos->fecha_nacimiento);
+                                    $fechaFormateada = date('d/m/Y', strtotime($fechaOriginal));
+                                    ?>
+                                    {{ date('d/m/Y', strtotime($fechaFormateada)) }}
+                                @endif
+
+                                @if ($profesor)
+                                    <?php
+                                    $fechaOriginal = ucfirst($profesor->fecha_nacimiento);
+                                    $fechaFormateada = date('d/m/Y', strtotime($fechaOriginal));
+                                    ?>
+                                    {{ date('d/m/Y', strtotime($fechaFormateada)) }}
+                                @endif
+                            </span>
+                        </li>
+
+                        <li class="flex border-b py-2">
+                            <span class="font-bold w-36">Unido:</span>
+                            <span class="text-gray-700">
+                                @if ($alumnos)
+                                    <?php
+                                    $fechaHoraOriginal = $alumnos->created_at;
+                                    $fechaHoraFormateada = date('H:i:s d/m/Y', strtotime($fechaHoraOriginal));
+                                    ?>
+                                    {{ $fechaHoraFormateada }}
+                                @endif
+
+                                @if ($profesor)
+                                    <?php
+                                    $fechaHoraOriginal = $profesor->created_at;
+                                    $fechaHoraFormateada = date('H:i:s d/m/Y', strtotime($fechaHoraOriginal));
+                                    ?>
+                                    {{ $fechaHoraFormateada }}
+                                @endif
+                            </span>
                         </li>
                         <li class="flex border-b py-2">
-                            <span class="font-bold w-24">Joined:</span>
-                            <span class="text-gray-700">10 Jan 2022 (25 days ago)</span>
+                            <span class="font-bold w-36">Móvil:</span>
+                            <span class="text-gray-700">
+                                @if ($alumnos)
+                                    {{ $alumnos->telefono }}
+                                    <span> Dato no Obtenido</span>
+                                @else
+                                    
+                                @endif
+
+                                @if ($profesor)
+                                    {{ ucfirst($profesor->telefono) }}
+                                @endif
+                            </span>
                         </li>
                         <li class="flex border-b py-2">
-                            <span class="font-bold w-24">Mobile:</span>
-                            <span class="text-gray-700">(123) 123-1234</span>
+                            <span class="font-bold w-36">Email:</span>
+                            <span class="text-gray-700">
+                                @if ($alumnos)
+                                    {{ Auth::user()->email }}
+                                @endif
+                                @if ($profesor)
+                                    {{ Auth::user()->email }}
+                                @endif
+                            </span>
                         </li>
                         <li class="flex border-b py-2">
-                            <span class="font-bold w-24">Email:</span>
-                            <span class="text-gray-700">amandaross@example.com</span>
-                        </li>
-                        <li class="flex border-b py-2">
-                            <span class="font-bold w-24">Location:</span>
+                            <span class="font-bold w-36">Ubicación:</span>
                             <span class="text-gray-700">New York, US</span>
                         </li>
-                        <li class="flex border-b py-2">
+                        {{-- <li class="flex border-b py-2">
                             <span class="font-bold w-24">Languages:</span>
                             <span class="text-gray-700">English, Spanish</span>
-                        </li>
+                        </li> --}}
 
                     </ul>
                 </div>
