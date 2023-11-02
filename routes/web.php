@@ -62,6 +62,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::post('/asignar-nota', [NotaController::class, 'store'])->name('asignar-nota');
 
     Route::get('/perfil', [PerfilController::class,'show'])->name('perfil.mostrar');
+    
 
     // Route::get('dashboard/asignar-nota', [NotaController::class, 'asignarForm'])->name('nota.asignar.form');
 
