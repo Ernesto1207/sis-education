@@ -75,17 +75,17 @@
                         </td>
 
                         <td class="flex items-center px-6 py-4 space-x-3">
-                            {{-- @can('editar usuarios') --}}
+                            @if (auth()->user()->can('editar usuarios') || auth()->user()->can('administrador'))
                             <a href=" {{route('alumnos.edit', $alumno)}} "
                                 class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                            {{-- @endcan --}}
+                            @endcan
                             <form action="{{ route('alumnos.show', ['alumno' => $alumno->id]) }}"
                                 method="GET">
                                 <button type="submit"
                                     class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Ver
                                     Perfil</button>
                             </form>
-                            @can('eliminar usuarios')
+                            @if (auth()->user()->can('eliminar usuarios') || auth()->user()->can('administrador'))
                                 <form action=" {{route('alumnos.destroy', $alumno->id)}} " method="POST"
                                     class="font-medium text-red-600 dark:text-red-500 hover:underline cursor-pointer">
                                     @csrf

@@ -45,7 +45,7 @@
                     id="profesor_id" name="profesor_id" required>
                     <option value="" disabled selected>Seleccione un profesor</option>
                     @foreach ($profesores as $profesor)
-                        <option value="{{ $profesor->id }}">{{ $profesor->nombre }} {{ $profesor->apellido }}</option>
+                        <option value="{{ $profesor->id }}">{{ $profesor->nombres }} {{ $profesor->apellido_paterno }} {{ $profesor->apellido_materno }}</option>
                     @endforeach
                 </select>
             </div>

@@ -16,16 +16,25 @@
                         Nombres
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Apellidos 
+                        Apellido Paterno
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Apellido Materno
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Genero
                     </th>
                     <th scope="col" class="px-6 py-3">
+                        Email
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Telefono
+                    </th>
+                    <th scope="col" class="px-6 py-3">
                         Fecha de Nacimiento
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Ciudad  
+                        Ciudad
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Direccion
@@ -46,15 +55,27 @@
                             class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             {{ $profesor->dni }}
                         </th>
+
                         <td class="px-6 py-4">
-                            {{ $profesor->nombre }}
+                            {{ $profesor->nombres }}
                         </td>
+
                         <td class="px-6 py-4">
-                            {{ $profesor->apellido}}
+                            {{ $profesor->apellido_paterno }}
                         </td>
-                        
+
+                        <td class="px-6 py-4">
+                            {{ $profesor->apellido_materno }}
+                        </td>
+
                         <td class="px-6 py-4">
                             {{ $profesor->genero }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ $profesor->email }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ $profesor->telefono }}
                         </td>
                         <td class="px-6 py-4">
                             {{ $profesor->fecha_nacimiento }}
@@ -70,18 +91,15 @@
                         </td>
 
                         <td class="flex items-center px-6 py-4 space-x-3">
-                            {{-- @can('editar usuarios') --}}
-                            <a href=" {{route('profesores.edit', $profesor)}} "
-                                class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                            {{-- @endcan --}}
-                            <form action="{{ route('profesores.show', ['profesore' => $profesor->id]) }}"
-                                method="GET">
-                                <button type="submit"
-                                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Ver
-                                    Perfil</button>
-                            </form>
-                            @can('eliminar usuarios')
-                                <form action=" {{route('profesores.destroy', $profesor->id)}} " method="POST"
+                            @if (auth()->user()->can('editar usuarios') ||
+                                    auth()->user()->can('administrador')) <a
+                                    href=" {{ route('profesores.edit', $profesor) }} "
+                                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                            @endcan
+
+                            @if (auth()->user()->can('eliminar usuarios') ||
+                                    auth()->user()->can('administrador'))
+                                <form action=" {{ route('profesores.destroy', $profesor->id) }} " method="POST"
                                     class="font-medium text-red-600 dark:text-red-500 hover:underline cursor-pointer">
                                     @csrf
                                     @method('delete')
@@ -89,14 +107,14 @@
                                 </form>
                             @endcan
 
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
-    <div class="pagination">
-    </div>
+                </td>
+            </tr>
+        @endforeach
+    </tbody>
+</table>
+</div>
+<div class="pagination">
+</div>
 
-    <x-section-border />
+<x-section-border />
 </x-app-layout>

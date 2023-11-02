@@ -9,7 +9,20 @@ class profesores extends Model
 {
     use HasFactory;
 
-    protected $fillable = [];
+    protected $fillable = [
+        'user_id',
+        'dni',
+        'nombres',
+        'apellido_paterno',
+        'apellido_materno',
+        'genero',
+        'email',
+        'telefono',
+        'fecha_nacimiento',
+        'ciudad',
+        'direccion',
+        'estado',
+    ];
 
     public function user()
     {

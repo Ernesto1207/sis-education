@@ -34,10 +34,12 @@ class ProfesoresController extends Controller
     {
         //
         $request->validate([
-            'dni' => 'required|unique:alumnos',
+            'dni' => 'required|unique:profesores',
             'nombres' => 'required',
             'apellido_paterno' => 'required',
             'genero' => 'required',
+            'email' => 'required',
+            'telefono' => 'required',
             'fecha_nacimiento' => 'required',
             'ciudad' => 'required',
             'direccion' => 'required',
@@ -51,6 +53,8 @@ class ProfesoresController extends Controller
             'apellido_paterno' => $request->input('apellido_paterno'),
             'apellido_materno' => $request->input('apellido_materno'),
             'genero' => $request->input('genero'),
+            'email' => $request->input('email'),
+            'telefono' => $request->input('telefono'),
             'fecha_nacimiento' => $request->input('fecha_nacimiento'),
             'ciudad' => $request->input('ciudad'),
             'direccion' => $request->input('direccion'),
