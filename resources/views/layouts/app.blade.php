@@ -75,7 +75,8 @@
                                             <!-- start::Submenu content -->
                                             <div class="bg-white rounded">
                                                 <!-- start::Submenu link -->
-                                                <a x-data="{ linkHover: false }" href=""
+                                                <a x-data="{ linkHover: false }"
+                                                    href="{{ route('perfil.mostrar') }}"
                                                     class="flex items-center justify-between py-2 px-3 hover:bg-gray-100 bg-opacity-20"
                                                     @mouseover="linkHover = true" @mouseleave="linkHover = false">
                                                     <div class="flex items-center">

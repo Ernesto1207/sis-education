@@ -492,7 +492,7 @@
         <!-- end::Menu link -->
 
         <!-- start::Menu link asistencias -->
-        @if (auth()->user()->can('administrador'))
+        @if (auth()->user()->can('administrador') || auth()->user()->can('profesor'))
             <div x-data="{ linkHover: false, linkActive: false }">
                 <div @mouseover="linkHover = true" @mouseleave="linkHover = false"
                     @click="linkActive = !linkActive"

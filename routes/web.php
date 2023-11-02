@@ -6,6 +6,7 @@ use App\Http\Controllers\AsignarCursoController;
 use App\Http\Controllers\AsistenciaController;
 use App\Http\Controllers\CursoController;
 use App\Http\Controllers\NotaController;
+use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\PermisosController;
 use App\Http\Controllers\ProfesoresController;
 use App\Http\Controllers\RoleController;
@@ -60,6 +61,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::post('/validar-dni', [NotaController::class, 'validarDNI'])->name('dni.validar');
     Route::post('/asignar-nota', [NotaController::class, 'store'])->name('asignar-nota');
 
+    Route::get('/perfil', [PerfilController::class,'show'])->name('perfil.mostrar');
 
     // Route::get('dashboard/asignar-nota', [NotaController::class, 'asignarForm'])->name('nota.asignar.form');
 

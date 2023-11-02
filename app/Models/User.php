@@ -68,8 +68,8 @@ class User extends Authenticatable
         return $this->hasOne(Alumno::class);
     }
 
-    public function profesor()
+    public function profesores()
     {
-        return $this->hasOne(Profesor::class);
+        return $this->hasOne(profesores::class);
     }
 }
