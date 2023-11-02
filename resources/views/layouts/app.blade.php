@@ -75,7 +75,7 @@
                                             <!-- start::Submenu content -->
                                             <div class="bg-white rounded">
                                                 <!-- start::Submenu link -->
-                                                <a x-data="{ linkHover: false }" href="./../profile.html"
+                                                <a x-data="{ linkHover: false }" href=""
                                                     class="flex items-center justify-between py-2 px-3 hover:bg-gray-100 bg-opacity-20"
                                                     @mouseover="linkHover = true" @mouseleave="linkHover = false">
                                                     <div class="flex items-center">
@@ -96,7 +96,7 @@
                                                 <!-- end::Submenu link -->
 
                                                 <!-- start::Submenu link -->
-                                                <a x-data="{ linkHover: false }" href="./../settings.html"
+                                                <a x-data="{ linkHover: false }" href="{{ route('profile.show') }}"
                                                     class="flex items-center justify-between py-2 px-3 hover:bg-gray-100 bg-opacity-20"
                                                     @mouseover="linkHover = true" @mouseleave="linkHover = false">
                                                     <div class="flex items-center">
