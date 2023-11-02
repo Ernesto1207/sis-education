@@ -275,7 +275,7 @@
 
         <p class="text-xs text-gray-600 mt-10 mb-2 px-6 uppercase">Usuarios</p>
 
-        <!-- start::Menu link -->
+        <!-- start::Menu link roles -->
         @can('administrador')
             <div x-data="{ linkHover: false, linkActive: false }">
                 <div @mouseover="linkHover = true" @mouseleave="linkHover = false" @click="linkActive = !linkActive"
@@ -317,7 +317,7 @@
         @endcan
         <!-- end::Menu link -->
 
-        <!-- start::Menu link -->
+        <!-- start::Menu link permisos -->
         @can('administrador')
             <div x-data="{ linkHover: false, linkActive: false }">
                 <div @mouseover="linkHover = true" @mouseleave="linkHover = false" @click="linkActive = !linkActive"
@@ -359,8 +359,8 @@
         @endcan
         <!-- end::Menu link -->
 
-        <!-- start::Menu link -->
-        @can('administrador')
+        <!-- start::Menu link  usuarios-->
+        @if (auth()->user()->can('administrador'))
             <div x-data="{ linkHover: false, linkActive: false }">
                 <div @mouseover="linkHover = true" @mouseleave="linkHover = false" @click="linkActive = !linkActive"
                     class="flex items-center justify-between text-gray-400 hover:text-gray-100 px-6 py-3 cursor-pointer hover:bg-black hover:bg-opacity-30 transition duration-200"
@@ -401,7 +401,7 @@
         @endcan
         <!-- end::Menu link -->
 
-        <!-- start::Menu link -->
+        <!-- start::Menu link  alumnos-->
         @can('administrador')
             <div x-data="{ linkHover: false, linkActive: false }">
                 <div @mouseover="linkHover = true" @mouseleave="linkHover = false" @click="linkActive = !linkActive"
@@ -442,7 +442,7 @@
         @endcan
         <!-- end::Menu link -->
 
-        <!-- start::Menu link -->
+        <!-- start::Menu link profesores-->
         @can('administrador')
             <div x-data="{ linkHover: false, linkActive: false }">
                 <div @mouseover="linkHover = true" @mouseleave="linkHover = false" @click="linkActive = !linkActive"
@@ -483,7 +483,7 @@
         @endcan
         <!-- end::Menu link -->
 
-        <!-- start::Menu link -->
+        <!-- start::Menu link asistencias -->
         @can('administrador')
             <div x-data="{ linkHover: false, linkActive: false }">
                 <div @mouseover="linkHover = true" @mouseleave="linkHover = false" @click="linkActive = !linkActive"
