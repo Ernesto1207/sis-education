@@ -45,9 +45,32 @@
                     id="profesor_id" name="profesor_id" required>
                     <option value="" disabled selected>Seleccione un profesor</option>
                     @foreach ($profesores as $profesor)
-                        <option value="{{ $profesor->id }}">{{ $profesor->nombres }} {{ $profesor->apellido_paterno }} {{ $profesor->apellido_materno }}</option>
+                        <option value="{{ $profesor->id }}">{{ $profesor->nombres }} {{ $profesor->apellido_paterno }}
+                            {{ $profesor->apellido_materno }}</option>
                     @endforeach
                 </select>
+            </div>
+            <div class="mb-4">
+                <label for="dias_semana" class="block text-gray-700 text-sm font-bold mb-2">Días de la Semana:</label>
+                <input type="text" id="dias_semana" name="dias_semana"
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    placeholder="Lunes, Miércoles, Viernes" required>
+            </div>
+
+            <div class="mb-4">
+                <label for="horario_entrada" class="block text-gray-700 text-sm font-bold mb-2">Horario de
+                    Entrada:</label>
+                <input type="time" id="horario_entrada" name="horario_entrada"
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    required>
+            </div>
+
+            <div class="mb-4">
+                <label for="horario_salida" class="block text-gray-700 text-sm font-bold mb-2">Horario de
+                    Salida:</label>
+                <input type="time" id="horario_salida" name="horario_salida"
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    required>
             </div>
 
             <div class="flex items-center justify-between">

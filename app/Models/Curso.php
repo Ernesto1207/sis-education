@@ -9,7 +9,13 @@ class Curso extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nombre', 'descripcion'];
+    protected $fillable = [
+        'nombre',
+        'descripcion',
+        'horario_entrada',
+        'horario_salida',
+        'dias_semana',
+    ];
 
     public function profesores()
     {

@@ -53,11 +53,12 @@ $fechaMaxima = date('Y-m-d', strtotime('-18 years'));
             <!-- email -->
             <div class="mb-4">
                 <label for="email" class="block text-gray-700 dark:text-gray-300">Email:</label>
-                <input type="email" id="email" name="email" class="form-input" value="{{ old('email') }}" required>
+                <input type="email" id="email" name="email" class="form-input" value="{{ old('email') }}"
+                    required>
             </div>
 
-             <!-- telefono -->
-             <div class="mb-4">
+            <!-- telefono -->
+            <div class="mb-4">
                 <label for="telefono" class="block text-gray-700 dark:text-gray-300">Telefono:</label>
                 <input type="number" id="telefono" name="telefono" class="form-input" required>
             </div>

@@ -16,9 +16,11 @@ return new class extends Migration
             $table->unsignedBigInteger('profesor_id')->nullable();
             $table->string('nombre');
             $table->text('descripcion');
+            $table->time('horario_entrada');
+            $table->time('horario_salida');
+            $table->string('dias_semana'); 
             $table->timestamps();
 
-            // Clave foránea para relacionar con la tabla de profesores
             $table->foreign('profesor_id')->references('id')->on('profesores');
         });
     }

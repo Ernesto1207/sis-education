@@ -276,7 +276,7 @@
         <p class="text-xs text-gray-600 mt-10 mb-2 px-6 uppercase">Usuarios</p>
 
         <!-- start::Menu link roles -->
-        @can('administrador')
+        @if (auth()->user()->can('administrador'))
             <div x-data="{ linkHover: false, linkActive: false }">
                 <div @mouseover="linkHover = true" @mouseleave="linkHover = false" @click="linkActive = !linkActive"
                     class="flex items-center justify-between text-gray-400 hover:text-gray-100 px-6 py-3 cursor-pointer hover:bg-black hover:bg-opacity-30 transition duration-200"
@@ -318,7 +318,7 @@
         <!-- end::Menu link -->
 
         <!-- start::Menu link permisos -->
-        @can('administrador')
+        @if (auth()->user()->can('administrador'))
             <div x-data="{ linkHover: false, linkActive: false }">
                 <div @mouseover="linkHover = true" @mouseleave="linkHover = false" @click="linkActive = !linkActive"
                     class="flex items-center justify-between text-gray-400 hover:text-gray-100 px-6 py-3 cursor-pointer hover:bg-black hover:bg-opacity-30 transition duration-200"
@@ -326,8 +326,8 @@
                     <div class="flex items-center">
                         <span class="ml-3">Permisos</span>
                     </div>
-                    <svg class="w-3 h-3 transition duration-300" :class="linkActive ? 'rotate-90' : ''" fill="none"
-                        stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="w-3 h-3 transition duration-300" :class="linkActive ? 'rotate-90' : ''"
+                        fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
                         </path>
                     </svg>
@@ -362,14 +362,16 @@
         <!-- start::Menu link  usuarios-->
         @if (auth()->user()->can('administrador'))
             <div x-data="{ linkHover: false, linkActive: false }">
-                <div @mouseover="linkHover = true" @mouseleave="linkHover = false" @click="linkActive = !linkActive"
+                <div @mouseover="linkHover = true" @mouseleave="linkHover = false"
+                    @click="linkActive = !linkActive"
                     class="flex items-center justify-between text-gray-400 hover:text-gray-100 px-6 py-3 cursor-pointer hover:bg-black hover:bg-opacity-30 transition duration-200"
                     :class="linkActive ? 'bg-black bg-opacity-30 text-gray-100' : ''">
                     <div class="flex items-center">
                         <span class="ml-3">Usuarios</span>
                     </div>
-                    <svg class="w-3 h-3 transition duration-300" :class="linkActive ? 'rotate-90' : ''" fill="none"
-                        stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="w-3 h-3 transition duration-300" :class="linkActive ? 'rotate-90' : ''"
+                        fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
                         </path>
                     </svg>
@@ -402,17 +404,20 @@
         <!-- end::Menu link -->
 
         <!-- start::Menu link  alumnos-->
-        @can('administrador')
+        @if (auth()->user()->can('administrador'))
             <div x-data="{ linkHover: false, linkActive: false }">
-                <div @mouseover="linkHover = true" @mouseleave="linkHover = false" @click="linkActive = !linkActive"
+                <div @mouseover="linkHover = true" @mouseleave="linkHover = false"
+                    @click="linkActive = !linkActive"
                     class="flex items-center justify-between text-gray-400 hover:text-gray-100 px-6 py-3 cursor-pointer hover:bg-black hover:bg-opacity-30 transition duration-200"
                     :class="linkActive ? 'bg-black bg-opacity-30 text-gray-100' : ''">
                     <div class="flex items-center">
                         <span class="ml-3">Alumnos</span>
                     </div>
-                    <svg class="w-3 h-3 transition duration-300" :class="linkActive ? 'rotate-90' : ''" fill="none"
-                        stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                    <svg class="w-3 h-3 transition duration-300" :class="linkActive ? 'rotate-90' : ''"
+                        fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 5l7 7-7 7">
                         </path>
                     </svg>
                 </div>
@@ -443,17 +448,20 @@
         <!-- end::Menu link -->
 
         <!-- start::Menu link profesores-->
-        @can('administrador')
+        @if (auth()->user()->can('administrador'))
             <div x-data="{ linkHover: false, linkActive: false }">
-                <div @mouseover="linkHover = true" @mouseleave="linkHover = false" @click="linkActive = !linkActive"
+                <div @mouseover="linkHover = true" @mouseleave="linkHover = false"
+                    @click="linkActive = !linkActive"
                     class="flex items-center justify-between text-gray-400 hover:text-gray-100 px-6 py-3 cursor-pointer hover:bg-black hover:bg-opacity-30 transition duration-200"
                     :class="linkActive ? 'bg-black bg-opacity-30 text-gray-100' : ''">
                     <div class="flex items-center">
                         <span class="ml-3">Profesores</span>
                     </div>
-                    <svg class="w-3 h-3 transition duration-300" :class="linkActive ? 'rotate-90' : ''" fill="none"
-                        stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                    <svg class="w-3 h-3 transition duration-300"
+                        :class="linkActive ? 'rotate-90' : ''" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 5l7 7-7 7">
                         </path>
                     </svg>
                 </div>
@@ -484,17 +492,21 @@
         <!-- end::Menu link -->
 
         <!-- start::Menu link asistencias -->
-        @can('administrador')
+        @if (auth()->user()->can('administrador'))
             <div x-data="{ linkHover: false, linkActive: false }">
-                <div @mouseover="linkHover = true" @mouseleave="linkHover = false" @click="linkActive = !linkActive"
+                <div @mouseover="linkHover = true" @mouseleave="linkHover = false"
+                    @click="linkActive = !linkActive"
                     class="flex items-center justify-between text-gray-400 hover:text-gray-100 px-6 py-3 cursor-pointer hover:bg-black hover:bg-opacity-30 transition duration-200"
                     :class="linkActive ? 'bg-black bg-opacity-30 text-gray-100' : ''">
                     <div class="flex items-center">
                         <span class="ml-3">Asistencias</span>
                     </div>
-                    <svg class="w-3 h-3 transition duration-300" :class="linkActive ? 'rotate-90' : ''" fill="none"
-                        stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                    <svg class="w-3 h-3 transition duration-300"
+                        :class="linkActive ? 'rotate-90' : ''" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 5l7 7-7 7">
                         </path>
                     </svg>
                 </div>
@@ -527,15 +539,17 @@
         <!-- end::Menu link -->
 
         <!-- start::Menu link -->
-        <a x-data="{ linkHover: false }" @mouseover="linkHover = true" @mouseleave="linkHover = false"
-            href="./../messages.html"
+        <a x-data="{ linkHover: false }" @mouseover="linkHover = true"
+            @mouseleave="linkHover = false" href="./../messages.html"
             class="flex items-center text-gray-400 px-6 py-3 cursor-pointer hover:bg-black hover:bg-opacity-30 transition duration-200">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 transition duration-200"
-                :class="linkHover ? 'text-gray-100' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                :class="linkHover ? 'text-gray-100' : ''" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
             </svg>
-            <span class="ml-3 transition duration-200" :class="linkHover ? 'text-gray-100' : ''">
+            <span class="ml-3 transition duration-200"
+                :class="linkHover ? 'text-gray-100' : ''">
                 Messages
             </span>
         </a>
@@ -544,5 +558,5 @@
 
         {{-- <p class="text-xs text-gray-600 mt-10 mb-2 px-6 uppercase">Components</p> --}}
 
-    </nav>
+</nav>
 </aside>

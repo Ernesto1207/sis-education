@@ -39,11 +39,37 @@ class CursoController extends Controller
             'nombre' => 'required|string',
             'descripcion' => 'required|string',
             'profesor_id' => 'required|exists:profesores,id',
+            'horario_entrada' => 'required|date_format:H:i', // Validación para el formato de hora
+            'horario_salida' => 'required|date_format:H:i',  // Validación para el formato de hora
+            'dias_semana' => 'required|string',
         ]);
+
+        $profesorId = $request->input('profesor_id');
+        $horarioEntradaNuevo = $request->input('horario_entrada');
+        $horarioSalidaNuevo = $request->input('horario_salida');
+
+        $cursoExistente = Curso::where('profesor_id', $profesorId)
+            ->where(function ($query) use ($horarioEntradaNuevo, $horarioSalidaNuevo) {
+                $query->where(function ($q) use ($horarioEntradaNuevo, $horarioSalidaNuevo) {
+                    $q->where('horario_entrada', '<', $horarioSalidaNuevo)
+                        ->where('horario_salida', '>', $horarioEntradaNuevo);
+                });
+            })
+            ->first();
+
+        if ($cursoExistente) {
+            return redirect()->back()->with('error', 'Los horarios se cruzan con otro curso del mismo profesor.');
+        }
+
         $curso = new Curso();
         $curso->nombre = $request->input('nombre');
         $curso->descripcion = $request->input('descripcion');
-        $curso->save(); // Guarda el curso primero para obtener su ID
+        $curso->horario_entrada = $horarioEntradaNuevo;
+        $curso->horario_salida = $horarioSalidaNuevo;
+        $curso->profesor_id = $profesorId;
+        $curso->dias_semana = $request->input('dias_semana');
+        $curso->save();
+
 
         // Ahora asocia el profesor al curso
         $profesorId = $request->input('profesor_id');

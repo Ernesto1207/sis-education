@@ -29,6 +29,9 @@
                                 Profesor
                             </th>
                             <th scope="col" class="px-6 py-3">
+                                Horario
+                            </th>
+                            <th scope="col" class="px-6 py-3">
                                 Action
                             </th>
                         </tr>
@@ -48,11 +51,15 @@
                                 </td>
                                 <td class="px-6 py-4">
                                     @if ($curso->profesores->isNotEmpty())
-                                        {{ $curso->profesores->first()->nombre }}
-                                        {{ $curso->profesores->first()->apellido }}
+                                        {{ $curso->profesores->first()->nombres }}
+                                        {{ $curso->profesores->first()->apellido_paterno }}
                                     @else
                                         Sin profesor asignado
                                     @endif
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ $curso->horario_entrada }} -
+                                    {{ $curso->horario_salida }}
                                 </td>
 
                                 <td class="px-6 py-4">
@@ -94,7 +101,8 @@
                                                     <h3
                                                         class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
                                                         Estas seguro de eliminar al usuario?</h3>
-                                                    <form action="{{ route('cursos.destroy', ['curso' => $curso->id]) }}"
+                                                    <form
+                                                        action="{{ route('cursos.destroy', ['curso' => $curso->id]) }}"
                                                         method="post">
                                                         @csrf
                                                         @method('DELETE')
