@@ -16,6 +16,7 @@ class PerfilController extends Controller
         $usuario = Auth::user();
         $alumnos = $usuario->alumno; 
         $profesor = $usuario->profesores;
+        
 
         return view('profile.mostrar', compact('usuario','alumnos', 'profesor'));
     }
