@@ -175,7 +175,7 @@
                     </ul>
                 </div>
                 <div class="flex-1 bg-white rounded-lg shadow-xl mt-4 p-8">
-                    <h4 class="text-xl text-gray-900 font-bold">Activity log</h4>
+                    <h4 class="text-xl text-gray-900 font-bold">Registro de actividades</h4>
                     <div class="relative px-4">
                         <div class="absolute h-full border border-dashed border-opacity-20 border-secondary">
                         </div>
