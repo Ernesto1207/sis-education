@@ -4,7 +4,9 @@ use App\Http\Controllers\AlumnoController;
 use App\Http\Controllers\AsignarController;
 use App\Http\Controllers\AsignarCursoController;
 use App\Http\Controllers\AsistenciaController;
+use App\Http\Controllers\ConductaController;
 use App\Http\Controllers\CursoController;
+use App\Http\Controllers\JustificacionesController;
 use App\Http\Controllers\NotaController;
 use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\PermisosController;
@@ -62,4 +64,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::post('/asignar-nota', [NotaController::class, 'store'])->name('asignar-nota');
 
     Route::get('/perfil', [PerfilController::class, 'show'])->name('perfil.mostrar');
+
+    Route::resource('/conducta', ConductaController::class)->names('conducta');
+
+    Route::resource('/justificaciones', JustificacionesController::class)->names('justificaciones');
 });
