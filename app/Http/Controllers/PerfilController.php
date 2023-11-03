@@ -69,10 +69,10 @@ class PerfilController extends Controller
             $alumno = Alumno::with('cursos')->find($alumnoId);
             $dia1 = 'lunes';
             $dia2 = 'martes';
-            $dia3 = '';
-            $dia4 = '';
-            $dia5 = '';
-            $dia6 = '';
+            $dia3 = 'miercoles';
+            $dia4 = 'jueves';
+            $dia5 = 'viernes';
+            $dia6 = 'sabado';
 
 
             $cursosLunes = $alumno->cursos
@@ -87,21 +87,26 @@ class PerfilController extends Controller
                 })
                 ->sortBy('horario_entrada');
 
-            $cursosMiercoles = $alumno->cursos->filter(function ($curso) use ($dia3) {
-                return $curso->dias_semana === $dia3;
-            });
+            $cursosMiercoles = $alumno->cursos
+                ->filter(function ($curso) use ($dia3) {
+                    return $curso->dias_semana === $dia3;
+                })->sortBy('horario_entrada');
 
-            $cursosJueves = $alumno->cursos->filter(function ($curso) use ($dia4) {
-                return $curso->dias_semana === $dia4;
-            });
+            $cursosJueves = $alumno->cursos
+                ->filter(function ($curso) use ($dia4) {
+                    return $curso->dias_semana === $dia4;
+                })->sortBy('horario_entrada');
 
-            $cursosViernes = $alumno->cursos->filter(function ($curso) use ($dia5) {
-                return $curso->dias_semana === $dia5;
-            });
+            $cursosViernes = $alumno->cursos
+                ->filter(function ($curso) use ($dia5) {
+                    return $curso->dias_semana === $dia5;
+                })->sortBy('horario_entrada');
 
-            $cursosSabado = $alumno->cursos->filter(function ($curso) use ($dia6) {
-                return $curso->dias_semana === $dia6;
-            });
+            $cursosSabado = $alumno->cursos
+                ->filter(function ($curso) use ($dia6) {
+                    return $curso->dias_semana === $dia6;
+                })->sortBy('horario_entrada');
+
             return view('profile.mostrar', compact(
                 'usuario',
                 'alumnos',
