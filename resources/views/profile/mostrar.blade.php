@@ -52,27 +52,7 @@
                     @endif
                 </p>
             </div>
-            {{-- <div class="flex-1 flex flex-col items-center lg:items-end justify-end px-8 mt-2">
-                <div class="flex items-center space-x-4 mt-2">
-                    <button
-                        class="flex items-center bg-blue-600 hover:bg-blue-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                            <path
-                                d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z" />
-                        </svg>
-                        <span>Connect</span>
-                    </button>
-                    <button
-                        class="flex items-center bg-blue-600 hover:bg-blue-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd"
-                                d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z"
-                                clip-rule="evenodd" />
-                        </svg>
-                        <span>Message</span>
-                    </button>
-                </div>
-            </div> --}}
+
 
         </div>
 
@@ -144,7 +124,6 @@
                                     {{ $alumnos->telefono }}
                                     <span> Dato no Obtenido</span>
                                 @else
-                                    
                                 @endif
 
                                 @if ($profesor)
@@ -165,7 +144,18 @@
                         </li>
                         <li class="flex border-b py-2">
                             <span class="font-bold w-36">Ubicación:</span>
-                            <span class="text-gray-700">New York, US</span>
+                            <span class="text-gray-700">
+                                @if ($alumnos)
+                                    {{ ucfirst($alumnos->direccion) }}
+                                    ,
+                                    {{ ucfirst($alumnos->ciudad) }}
+                                @endif
+                                @if ($profesor)
+                                    {{ ucfirst($profesor->direccion) }}
+                                    ,
+                                    {{ ucfirst($profesor->ciudad) }}
+                                @endif
+                            </span>
                         </li>
                         {{-- <li class="flex border-b py-2">
                             <span class="font-bold w-24">Languages:</span>
@@ -191,77 +181,113 @@
                             </div>
                         </div>
                         <!-- end::Timeline item -->
+                    </div>
+                </div>
 
-                        <!-- start::Timeline item -->
-                        <div class="flex items-center w-full my-6 -ml-1.5">
-                            <div class="w-1/12">
-                                <div class="w-3.5 h-3.5 bg-primary rounded-full"></div>
-                            </div>
-                            <div class="w-11/12">
-                                <p class="text-sm">
-                                    Connected with <a href="#" class="text-primary font-bold">Colby
-                                        Covington</a>.</p>
-                                <p class="text-xs text-gray-500">15 min ago</p>
-                            </div>
-                        </div>
-                        <!-- end::Timeline item -->
+                <!-- start::Calendar -->
+                <div class="flex-1 bg-white rounded-lg shadow-xl mt-4 p-8">
+                    <h4 class="text-xl text-gray-900 font-bold">Calendario de Horarios de Cursos</h4>
+                    <div class="relative px-4 py-2">
+                        <div class="grid grid-cols-6 gap-2">
+                            <div class="text-center">Lunes</div>
+                            <div class="text-center">Martes</div>
+                            <div class="text-center">Miércoles</div>
+                            <div class="text-center">Jueves</div>
+                            <div class="text-center">Viernes</div>
+                            <div class="text-center">Sábado</div>
 
-                        <!-- start::Timeline item -->
-                        <div class="flex items-center w-full my-6 -ml-1.5">
-                            <div class="w-1/12">
-                                <div class="w-3.5 h-3.5 bg-primary rounded-full"></div>
-                            </div>
-                            <div class="w-11/12">
-                                <p class="text-sm">Invoice <a href="#" class="text-primary font-bold">#4563</a>
-                                    was created.</p>
-                                <p class="text-xs text-gray-500">57 min ago</p>
-                            </div>
-                        </div>
-                        <!-- end::Timeline item -->
+                            <div class="bg-gray-100 p-2 text-center flow-root ">
+                                @if ($cursosLunes->isEmpty())
+                                    <p>Sin Asignar</p>
+                                @else
+                                    @foreach ($cursosLunes as $curso)
+                                        <ul>
+                                            <li>{{ ucfirst($curso->nombre) }}</li>
+                                            <li>{{ $curso->horario_entrada }}</li>
+                                            <li>{{ $curso->horario_salida }}</li>
+                                            <li><br></li>
+                                        </ul>
+                                    @endforeach
+                                @endif
 
-                        <!-- start::Timeline item -->
-                        <div class="flex items-center w-full my-6 -ml-1.5">
-                            <div class="w-1/12">
-                                <div class="w-3.5 h-3.5 bg-primary rounded-full"></div>
-                            </div>
-                            <div class="w-11/12">
-                                <p class="text-sm">
-                                    Message received from <a href="#" class="text-primary font-bold">Cecilia
-                                        Hendric</a>.</p>
-                                <p class="text-xs text-gray-500">1 hour ago</p>
-                            </div>
-                        </div>
-                        <!-- end::Timeline item -->
 
-                        <!-- start::Timeline item -->
-                        <div class="flex items-center w-full my-6 -ml-1.5">
-                            <div class="w-1/12">
-                                <div class="w-3.5 h-3.5 bg-primary rounded-full"></div>
                             </div>
-                            <div class="w-11/12">
-                                <p class="text-sm">New order received <a href="#"
-                                        class="text-primary font-bold">#OR9653</a>.</p>
-                                <p class="text-xs text-gray-500">2 hours ago</p>
+                            <div class="bg-gray-100 p-2 text-center">
+                                @if ($cursosMartes->isEmpty())
+                                    <p>Sin Asignar</p>
+                                @else
+                                    @foreach ($cursosMartes as $curso)
+                                        <ul>
+                                            <li>{{ ucfirst($curso->nombre) }}</li>
+                                            <li>{{ $curso->horario_entrada }}</li>
+                                            <li>{{ $curso->horario_salida }}</li>
+                                            <li><br></li>
+                                        </ul>
+                                    @endforeach
+                                @endif
                             </div>
-                        </div>
-                        <!-- end::Timeline item -->
+                            <div class="bg-gray-100 p-2 text-center">
+                                @if ($cursosMiercoles->isEmpty())
+                                    <p>Sin Asignar</p>
+                                @else
+                                    @foreach ($cursosMiercoles as $curso)
+                                        <ul>
+                                            <li>{{ ucfirst($curso->nombre) }}</li>
+                                            <li>{{ $curso->horario_entrada }}</li>
+                                            <li>{{ $curso->horario_salida }}</li>
+                                            <li><br></li>
+                                        </ul>
+                                    @endforeach
+                                @endif
+                            </div>
+                            <div class="bg-gray-100 p-2 text-center">
+                                @if ($cursosJueves->isEmpty())
+                                    <p>Sin Asignar</p>
+                                @else
+                                    @foreach ($cursosJueves as $curso)
+                                        <ul>
+                                            <li>{{ ucfirst($curso->nombre) }}</li>
+                                            <li>{{ $curso->horario_entrada }}</li>
+                                            <li>{{ $curso->horario_salida }}</li>
+                                            <li><br></li>
+                                        </ul>
+                                    @endforeach
+                                @endif
+                            </div>
+                            <div class="bg-gray-100 p-2 text-center">
+                                @if ($cursosViernes->isEmpty())
+                                    <p>Sin Asignar</p>
+                                @else
+                                    @foreach ($cursosViernes as $curso)
+                                        <ul>
+                                            <li>{{ ucfirst($curso->nombre) }}</li>
+                                            <li>{{ $curso->horario_entrada }}</li>
+                                            <li>{{ $curso->horario_salida }}</li>
+                                            <li><br></li>
+                                        </ul>
+                                    @endforeach
+                                @endif
+                            </div>
+                            <div class="bg-gray-100 p-2 text-center">
+                                @if ($cursosSabado->isEmpty())
+                                    <p>Sin Asignar</p>
+                                @else
+                                    @foreach ($cursosSabado as $curso)
+                                        <ul>
+                                            <li>{{ ucfirst($curso->nombre) }}</li>
+                                            <li>{{ $curso->horario_entrada }}</li>
+                                            <li>{{ $curso->horario_salida }}</li>
+                                            <li><br></li>
+                                        </ul>
+                                    @endforeach
+                                @endif
+                            </div>
 
-                        <!-- start::Timeline item -->
-                        <div class="flex items-center w-full my-6 -ml-1.5">
-                            <div class="w-1/12">
-                                <div class="w-3.5 h-3.5 bg-primary rounded-full"></div>
-                            </div>
-                            <div class="w-11/12">
-                                <p class="text-sm">
-                                    Message received from <a href="#" class="text-primary font-bold">Jane
-                                        Stillman</a>.</p>
-                                <p class="text-xs text-gray-500">2 hours ago</p>
-                            </div>
                         </div>
-                        <!-- end::Timeline item -->
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 </x-app-layout>
