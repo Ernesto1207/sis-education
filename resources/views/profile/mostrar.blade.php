@@ -196,93 +196,189 @@
                             <div class="text-center">Viernes</div>
                             <div class="text-center">Sábado</div>
 
-                            <div class="bg-gray-100 p-2 text-center flow-root ">
-                                @if ($cursosLunes->isEmpty())
-                                    <p>Sin Asignar</p>
-                                @else
-                                    @foreach ($cursosLunes as $curso)
-                                        <ul>
-                                            <li>{{ ucfirst($curso->nombre) }}</li>
-                                            <li>{{ $curso->horario_entrada }}</li>
-                                            <li>{{ $curso->horario_salida }}</li>
-                                            <li><br></li>
-                                        </ul>
-                                    @endforeach
-                                @endif
+                            @if ($alumnos)
+                                <div class="bg-gray-100 p-2 text-center flow-root ">
+                                    @if ($cursosLunes->isEmpty())
+                                        <p>Sin Asignar</p>
+                                    @else
+                                        @foreach ($cursosLunes as $curso)
+                                            <ul>
+                                                <li>{{ ucfirst($curso->nombre) }}</li>
+                                                <li>{{ $curso->horario_entrada }}</li>
+                                                <li>{{ $curso->horario_salida }}</li>
+                                                <li><br></li>
+                                            </ul>
+                                        @endforeach
+                                    @endif
+                                </div>
 
+                                <div class="bg-gray-100 p-2 text-center">
+                                    @if ($cursosMartes->isEmpty())
+                                        <p>Sin Asignar</p>
+                                    @else
+                                        @foreach ($cursosMartes as $curso)
+                                            <ul>
+                                                <li>{{ ucfirst($curso->nombre) }}</li>
+                                                <li>{{ $curso->horario_entrada }}</li>
+                                                <li>{{ $curso->horario_salida }}</li>
+                                                <li><br></li>
+                                            </ul>
+                                        @endforeach
+                                    @endif
+                                </div>
 
-                            </div>
-                            <div class="bg-gray-100 p-2 text-center">
-                                @if ($cursosMartes->isEmpty())
-                                    <p>Sin Asignar</p>
-                                @else
-                                    @foreach ($cursosMartes as $curso)
-                                        <ul>
-                                            <li>{{ ucfirst($curso->nombre) }}</li>
-                                            <li>{{ $curso->horario_entrada }}</li>
-                                            <li>{{ $curso->horario_salida }}</li>
-                                            <li><br></li>
-                                        </ul>
-                                    @endforeach
-                                @endif
-                            </div>
-                            <div class="bg-gray-100 p-2 text-center">
-                                @if ($cursosMiercoles->isEmpty())
-                                    <p>Sin Asignar</p>
-                                @else
-                                    @foreach ($cursosMiercoles as $curso)
-                                        <ul>
-                                            <li>{{ ucfirst($curso->nombre) }}</li>
-                                            <li>{{ $curso->horario_entrada }}</li>
-                                            <li>{{ $curso->horario_salida }}</li>
-                                            <li><br></li>
-                                        </ul>
-                                    @endforeach
-                                @endif
-                            </div>
-                            <div class="bg-gray-100 p-2 text-center">
-                                @if ($cursosJueves->isEmpty())
-                                    <p>Sin Asignar</p>
-                                @else
-                                    @foreach ($cursosJueves as $curso)
-                                        <ul>
-                                            <li>{{ ucfirst($curso->nombre) }}</li>
-                                            <li>{{ $curso->horario_entrada }}</li>
-                                            <li>{{ $curso->horario_salida }}</li>
-                                            <li><br></li>
-                                        </ul>
-                                    @endforeach
-                                @endif
-                            </div>
-                            <div class="bg-gray-100 p-2 text-center">
-                                @if ($cursosViernes->isEmpty())
-                                    <p>Sin Asignar</p>
-                                @else
-                                    @foreach ($cursosViernes as $curso)
-                                        <ul>
-                                            <li>{{ ucfirst($curso->nombre) }}</li>
-                                            <li>{{ $curso->horario_entrada }}</li>
-                                            <li>{{ $curso->horario_salida }}</li>
-                                            <li><br></li>
-                                        </ul>
-                                    @endforeach
-                                @endif
-                            </div>
-                            <div class="bg-gray-100 p-2 text-center">
-                                @if ($cursosSabado->isEmpty())
-                                    <p>Sin Asignar</p>
-                                @else
-                                    @foreach ($cursosSabado as $curso)
-                                        <ul>
-                                            <li>{{ ucfirst($curso->nombre) }}</li>
-                                            <li>{{ $curso->horario_entrada }}</li>
-                                            <li>{{ $curso->horario_salida }}</li>
-                                            <li><br></li>
-                                        </ul>
-                                    @endforeach
-                                @endif
-                            </div>
+                                <div class="bg-gray-100 p-2 text-center">
+                                    @if ($cursosMiercoles->isEmpty())
+                                        <p>Sin Asignar</p>
+                                    @else
+                                        @foreach ($cursosMiercoles as $curso)
+                                            <ul>
+                                                <li>{{ ucfirst($curso->nombre) }}</li>
+                                                <li>{{ $curso->horario_entrada }}</li>
+                                                <li>{{ $curso->horario_salida }}</li>
+                                                <li><br></li>
+                                            </ul>
+                                        @endforeach
+                                    @endif
+                                </div>
 
+                                <div class="bg-gray-100 p-2 text-center">
+                                    @if ($cursosJueves->isEmpty())
+                                        <p>Sin Asignar</p>
+                                    @else
+                                        @foreach ($cursosJueves as $curso)
+                                            <ul>
+                                                <li>{{ ucfirst($curso->nombre) }}</li>
+                                                <li>{{ $curso->horario_entrada }}</li>
+                                                <li>{{ $curso->horario_salida }}</li>
+                                                <li><br></li>
+                                            </ul>
+                                        @endforeach
+                                    @endif
+                                </div>
+
+                                <div class="bg-gray-100 p-2 text-center">
+                                    @if ($cursosViernes->isEmpty())
+                                        <p>Sin Asignar</p>
+                                    @else
+                                        @foreach ($cursosViernes as $curso)
+                                            <ul>
+                                                <li>{{ ucfirst($curso->nombre) }}</li>
+                                                <li>{{ $curso->horario_entrada }}</li>
+                                                <li>{{ $curso->horario_salida }}</li>
+                                                <li><br></li>
+                                            </ul>
+                                        @endforeach
+                                    @endif
+                                </div>
+
+                                <div class="bg-gray-100 p-2 text-center">
+                                    @if ($cursosSabado->isEmpty())
+                                        <p>Sin Asignar</p>
+                                    @else
+                                        @foreach ($cursosSabado as $curso)
+                                            <ul>
+                                                <li>{{ ucfirst($curso->nombre) }}</li>
+                                                <li>{{ $curso->horario_entrada }}</li>
+                                                <li>{{ $curso->horario_salida }}</li>
+                                                <li><br></li>
+                                            </ul>
+                                        @endforeach
+                                    @endif
+                                </div>
+                            @endif
+
+                            @if ($profesor)
+                                <div class="bg-gray-100 p-2 text-center flow-root ">
+                                    @if ($cursosLunes->isEmpty())
+                                        <p>Sin Asignar</p>
+                                    @else
+                                        @foreach ($cursosLunes as $curso)
+                                            <ul>
+                                                <li>{{ ucfirst($curso->nombre) }}</li>
+                                                <li>{{ $curso->horario_entrada }}</li>
+                                                <li>{{ $curso->horario_salida }}</li>
+                                                <li><br></li>
+                                            </ul>
+                                        @endforeach
+                                    @endif
+                                </div>
+
+                                <div class="bg-gray-100 p-2 text-center">
+                                    @if ($cursosMartes->isEmpty())
+                                        <p>Sin Asignar</p>
+                                    @else
+                                        @foreach ($cursosMartes as $curso)
+                                            <ul>
+                                                <li>{{ ucfirst($curso->nombre) }}</li>
+                                                <li>{{ $curso->horario_entrada }}</li>
+                                                <li>{{ $curso->horario_salida }}</li>
+                                                <li><br></li>
+                                            </ul>
+                                        @endforeach
+                                    @endif
+                                </div>
+
+                                <div class="bg-gray-100 p-2 text-center">
+                                    @if ($cursosMiercoles->isEmpty())
+                                        <p>Sin Asignar</p>
+                                    @else
+                                        @foreach ($cursosMiercoles as $curso)
+                                            <ul>
+                                                <li>{{ ucfirst($curso->nombre) }}</li>
+                                                <li>{{ $curso->horario_entrada }}</li>
+                                                <li>{{ $curso->horario_salida }}</li>
+                                                <li><br></li>
+                                            </ul>
+                                        @endforeach
+                                    @endif
+                                </div>
+
+                                <div class="bg-gray-100 p-2 text-center">
+                                    @if ($cursosJueves->isEmpty())
+                                        <p>Sin Asignar</p>
+                                    @else
+                                        @foreach ($cursosJueves as $curso)
+                                            <ul>
+                                                <li>{{ ucfirst($curso->nombre) }}</li>
+                                                <li>{{ $curso->horario_entrada }}</li>
+                                                <li>{{ $curso->horario_salida }}</li>
+                                                <li><br></li>
+                                            </ul>
+                                        @endforeach
+                                    @endif
+                                </div>
+
+                                <div class="bg-gray-100 p-2 text-center">
+                                    @if ($cursosViernes->isEmpty())
+                                        <p>Sin Asignar</p>
+                                    @else
+                                        @foreach ($cursosViernes as $curso)
+                                            <ul>
+                                                <li>{{ ucfirst($curso->nombre) }}</li>
+                                                <li>{{ $curso->horario_entrada }}</li>
+                                                <li>{{ $curso->horario_salida }}</li>
+                                                <li><br></li>
+                                            </ul>
+                                        @endforeach
+                                    @endif
+                                </div>
+
+                                <div class="bg-gray-100 p-2 text-center">
+                                    @if ($cursosSabado->isEmpty())
+                                        <p>Sin Asignar</p>
+                                    @else
+                                        @foreach ($cursosSabado as $curso)
+                                            <ul>
+                                                <li>{{ ucfirst($curso->nombre) }}</li>
+                                                <li>{{ $curso->horario_entrada }}</li>
+                                                <li>{{ $curso->horario_salida }}</li>
+                                                <li><br></li>
+                                            </ul>
+                                        @endforeach
+                                    @endif
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>

@@ -16,13 +16,16 @@
         @if ($cursos->count() > 0)
             <ul>
                 @foreach ($alumno->cursos as $curso)
-                    <li class="list-disc ml-6">
+                    <li class=" ml-6">
                         <span class="font-semibold">Curso:</span> {{ $curso->nombre }}
+                    </li>
+                    <li class=" ml-6">
+                        <span class="font-semibold">Dia:</span> {{ $curso->dias_semana }}
+                    </li>
+                    <li class=" ml-6">
                         <span class="font-semibold">Horario:</span> {{ $curso->pivot->horario }}
                     </li>
                 @endforeach
-
-
             </ul>
         @else
             <p class="italic mt-2">El alumno no está inscrito en ningún curso.</p>

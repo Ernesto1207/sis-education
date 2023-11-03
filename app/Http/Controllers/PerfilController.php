@@ -18,51 +18,103 @@ class PerfilController extends Controller
         $alumnos = $usuario->alumno;
         $profesor = $usuario->profesores;
 
+        if ($profesor) {
+            $profesorId = $usuario->profesores->id;
+            $cursosLunes = Curso::where('profesor_id', $profesorId)
+                ->where('dias_semana', 'lunes')
+                ->select('dias_semana', 'nombre', 'horario_entrada', 'horario_salida')
+                ->orderBy('horario_entrada', 'asc')
+                ->get();
 
-        $profesorId = $usuario->profesores->id;
+            $cursosMartes = Curso::where('profesor_id', $profesorId)
+                ->where('dias_semana', 'martes')
+                ->select('dias_semana', 'nombre', 'horario_entrada', 'horario_salida')
+                ->orderBy('horario_entrada', 'asc')
+                ->get();
+            $cursosMiercoles = Curso::where('profesor_id', $profesorId)
+                ->where('dias_semana', 'miercoles')
+                ->select('dias_semana', 'nombre', 'horario_entrada', 'horario_salida')
+                ->orderBy('horario_entrada', 'asc')
+                ->get();
+            $cursosJueves = Curso::where('profesor_id', $profesorId)
+                ->where('dias_semana', 'jueves')
+                ->select('dias_semana', 'nombre', 'horario_entrada', 'horario_salida')
+                ->orderBy('horario_entrada', 'asc')
+                ->get();
+            $cursosViernes = Curso::where('profesor_id', $profesorId)
+                ->where('dias_semana', 'viernes')
+                ->select('dias_semana', 'nombre', 'horario_entrada', 'horario_salida')
+                ->orderBy('horario_entrada', 'asc')
+                ->get();
+            $cursosSabado = Curso::where('profesor_id', $profesorId)
+                ->where('dias_semana', 'sabado')
+                ->select('dias_semana', 'nombre', 'horario_entrada', 'horario_salida')
+                ->orderBy('horario_entrada', 'asc')
+                ->get();
+            return view('profile.mostrar', compact(
+                'usuario',
+                'alumnos',
+                'profesor',
+                'cursosLunes',
+                'cursosMartes',
+                'cursosMiercoles',
+                'cursosJueves',
+                'cursosViernes',
+                'cursosSabado'
+            ));
+        }
+        if ($alumnos) {
 
-        $cursosLunes = Curso::where('profesor_id', $profesorId)
-            ->where('dias_semana', 'lunes')
-            ->select('dias_semana', 'nombre', 'horario_entrada', 'horario_salida')
-            ->orderBy('horario_entrada', 'asc')
-            ->get();
+            $alumnoId = $usuario->alumno->id;
+            $alumno = Alumno::with('cursos')->find($alumnoId);
+            $dia1 = 'lunes';
+            $dia2 = 'martes';
+            $dia3 = '';
+            $dia4 = '';
+            $dia5 = '';
+            $dia6 = '';
 
-        $cursosMartes = Curso::where('profesor_id', $profesorId)
-            ->where('dias_semana', 'martes')
-            ->select('dias_semana', 'nombre', 'horario_entrada', 'horario_salida')
-            ->orderBy('horario_entrada', 'asc')
-            ->get();
-        $cursosMiercoles = Curso::where('profesor_id', $profesorId)
-            ->where('dias_semana', 'miercoles')
-            ->select('dias_semana', 'nombre', 'horario_entrada', 'horario_salida')
-            ->orderBy('horario_entrada', 'asc')
-            ->get();
-        $cursosJueves = Curso::where('profesor_id', $profesorId)
-            ->where('dias_semana', 'jueves')
-            ->select('dias_semana', 'nombre', 'horario_entrada', 'horario_salida')
-            ->orderBy('horario_entrada', 'asc')
-            ->get();
-        $cursosViernes = Curso::where('profesor_id', $profesorId)
-            ->where('dias_semana', 'viernes')
-            ->select('dias_semana', 'nombre', 'horario_entrada', 'horario_salida')
-            ->orderBy('horario_entrada', 'asc')
-            ->get();
-        $cursosSabado = Curso::where('profesor_id', $profesorId)
-            ->where('dias_semana', 'sabado')
-            ->select('dias_semana', 'nombre', 'horario_entrada', 'horario_salida')
-            ->orderBy('horario_entrada', 'asc')
-            ->get();
 
-        return view('profile.mostrar', compact(
-            'usuario',
-            'alumnos',
-            'profesor',
-            'cursosLunes',
-            'cursosMartes',
-            'cursosMiercoles',
-            'cursosJueves',
-            'cursosViernes',
-            'cursosSabado'
-        ));
+            $cursosLunes = $alumno->cursos
+                ->filter(function ($curso) use ($dia1) {
+                    return $curso->dias_semana === $dia1;
+                })
+                ->sortBy('horario_entrada');
+
+            $cursosMartes = $alumno->cursos
+                ->filter(function ($curso) use ($dia2) {
+                    return $curso->dias_semana === $dia2;
+                })
+                ->sortBy('horario_entrada');
+
+            $cursosMiercoles = $alumno->cursos->filter(function ($curso) use ($dia3) {
+                return $curso->dias_semana === $dia3;
+            });
+
+            $cursosJueves = $alumno->cursos->filter(function ($curso) use ($dia4) {
+                return $curso->dias_semana === $dia4;
+            });
+
+            $cursosViernes = $alumno->cursos->filter(function ($curso) use ($dia5) {
+                return $curso->dias_semana === $dia5;
+            });
+
+            $cursosSabado = $alumno->cursos->filter(function ($curso) use ($dia6) {
+                return $curso->dias_semana === $dia6;
+            });
+            return view('profile.mostrar', compact(
+                'usuario',
+                'alumnos',
+                'profesor',
+                'alumnoId',
+                'cursosLunes',
+                'cursosMartes',
+                'cursosMiercoles',
+                'cursosJueves',
+                'cursosViernes',
+                'cursosSabado'
+
+            ));
+        }
     }
 }
