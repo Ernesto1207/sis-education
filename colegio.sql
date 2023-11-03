@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 02, 2023 at 04:45 AM
+-- Generation Time: Nov 03, 2023 at 11:34 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -48,7 +48,8 @@ CREATE TABLE `alumnos` (
 --
 
 INSERT INTO `alumnos` (`id`, `user_id`, `dni`, `nombres`, `apellido_paterno`, `apellido_materno`, `genero`, `fecha_nacimiento`, `ciudad`, `direccion`, `estado`, `created_at`, `updated_at`) VALUES
-(1, 2, '70403198', 'ernesto', 'solano', 'ballena', 'Masculino', '2000-07-12', 'monsefu', 'conrroy', 'Activo', '2023-11-02 04:29:53', '2023-11-02 04:29:53');
+(1, 2, '70403198', 'ernesto', 'solano', 'ballena', 'Masculino', '2000-07-12', 'monsefu', 'conrroy', 'Activo', '2023-11-02 04:29:53', '2023-11-02 04:29:53'),
+(2, 4, '12345678', 'raul', 'solano', 'ballena', 'Masculino', '2000-07-12', 'monsefu', 'conrroy', 'Activo', '2023-11-02 06:55:33', '2023-11-02 06:55:33');
 
 -- --------------------------------------------------------
 
@@ -64,6 +65,16 @@ CREATE TABLE `asignaciones_curso` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `asignaciones_curso`
+--
+
+INSERT INTO `asignaciones_curso` (`id`, `alumno_id`, `curso_id`, `horario`, `created_at`, `updated_at`) VALUES
+(1, 1, 4, '07:45:00', NULL, NULL),
+(2, 1, 3, '08:15:00', NULL, NULL),
+(3, 1, 2, '07:45:00', NULL, NULL),
+(4, 1, 5, '10:15:00', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -98,6 +109,28 @@ CREATE TABLE `conducta` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `conductas`
+--
+
+CREATE TABLE `conductas` (
+  `id` bigint UNSIGNED NOT NULL,
+  `alumno_id` bigint UNSIGNED NOT NULL,
+  `profesor_id` bigint UNSIGNED NOT NULL,
+  `descripcion` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `conductas`
+--
+
+INSERT INTO `conductas` (`id`, `alumno_id`, `profesor_id`, `descripcion`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 'se durmio en clase', '2023-11-03 09:44:32', '2023-11-03 11:04:25');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `cursos`
 --
 
@@ -118,9 +151,10 @@ CREATE TABLE `cursos` (
 --
 
 INSERT INTO `cursos` (`id`, `profesor_id`, `nombre`, `descripcion`, `horario_entrada`, `horario_salida`, `dias_semana`, `created_at`, `updated_at`) VALUES
-(2, NULL, 'lenguaje', 'silabus', '07:45:00', '08:15:00', 'lunes', '2023-11-02 04:32:38', '2023-11-02 04:32:38'),
+(2, 1, 'lenguaje', 'silabus', '08:15:00', '08:45:00', 'lunes', '2023-11-02 04:32:38', '2023-11-02 04:32:38'),
 (3, 1, 'matematica', 'silabus', '08:15:00', '08:00:00', 'martes', '2023-11-02 04:36:53', '2023-11-02 04:36:53'),
-(4, 1, 'geometria', 'silabus', '07:45:00', '08:15:00', 'lunes', '2023-11-02 04:40:26', '2023-11-02 04:40:26');
+(4, 1, 'geometria', 'silabus', '07:45:00', '08:15:00', 'lunes', '2023-11-02 04:40:26', '2023-11-02 04:40:26'),
+(5, 3, 'algebra', 'silabus', '10:15:00', '10:02:00', 'miercoles', '2023-11-03 07:02:42', '2023-11-03 07:02:42');
 
 -- --------------------------------------------------------
 
@@ -143,7 +177,8 @@ CREATE TABLE `curso_profesor` (
 INSERT INTO `curso_profesor` (`id`, `curso_id`, `profesor_id`, `created_at`, `updated_at`) VALUES
 (2, 2, 1, NULL, NULL),
 (3, 3, 1, NULL, NULL),
-(4, 4, 1, NULL, NULL);
+(4, 4, 1, NULL, NULL),
+(5, 5, 3, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -175,6 +210,13 @@ CREATE TABLE `justificaciones` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `justificaciones`
+--
+
+INSERT INTO `justificaciones` (`id`, `alumno_id`, `profesor_id`, `descripcion`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 'se levanto el parte de cuando se durmio en clase\r\n                                                xd', '2023-11-03 11:21:54', '2023-11-03 11:30:16');
 
 -- --------------------------------------------------------
 
@@ -208,7 +250,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (13, '2023_10_29_235259_create_notas_table', 1),
 (14, '2023_10_29_235324_create_justificaciones_table', 1),
 (15, '2023_10_29_235348_create_conducta_table', 1),
-(16, '2023_10_30_012324_create_curso_profesor_table', 1);
+(16, '2023_10_30_012324_create_curso_profesor_table', 1),
+(17, '2023_11_03_042122_create_conductas_table', 2);
 
 -- --------------------------------------------------------
 
@@ -239,7 +282,9 @@ CREATE TABLE `model_has_roles` (
 --
 
 INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
-(1, 'App\\Models\\User', 1);
+(1, 'App\\Models\\User', 1),
+(2, 'App\\Models\\User', 2),
+(2, 'App\\Models\\User', 3);
 
 -- --------------------------------------------------------
 
@@ -287,7 +332,8 @@ CREATE TABLE `permissions` (
 --
 
 INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
-(1, 'administrador', 'sanctum', '2023-11-02 04:27:53', '2023-11-02 04:27:53');
+(1, 'administrador', 'sanctum', '2023-11-02 04:27:53', '2023-11-02 04:27:53'),
+(2, 'profesor', 'sanctum', '2023-11-02 06:39:40', '2023-11-02 06:39:40');
 
 -- --------------------------------------------------------
 
@@ -337,7 +383,8 @@ CREATE TABLE `profesores` (
 --
 
 INSERT INTO `profesores` (`id`, `user_id`, `dni`, `nombres`, `apellido_paterno`, `apellido_materno`, `genero`, `email`, `telefono`, `fecha_nacimiento`, `ciudad`, `direccion`, `estado`, `created_at`, `updated_at`) VALUES
-(1, 3, '71845979', 'Profesor', 'test', 'test', 'Masculino', 'profe@gmail.com', '987654321', '2005-08-01', 'monsefu', 'conrroy', 'Activo', '2023-11-02 04:30:48', '2023-11-02 04:30:48');
+(1, 3, '71845979', 'Profesor', 'test', 'test', 'Masculino', 'profe@gmail.com', '987654321', '2005-08-01', 'monsefu', 'conrroy', 'Activo', '2023-11-02 04:30:48', '2023-11-02 04:30:48'),
+(3, 6, '78787878', 'profe2', 'test', 'test', 'Masculino', 'profe2@gmail.com', '121212121', '2005-01-03', 'monsefu', 'conrroy', 'Activo', '2023-11-03 07:01:54', '2023-11-03 07:01:54');
 
 -- --------------------------------------------------------
 
@@ -358,7 +405,8 @@ CREATE TABLE `roles` (
 --
 
 INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
-(1, 'administrador', 'sanctum', '2023-11-02 04:27:46', '2023-11-02 04:27:46');
+(1, 'administrador', 'sanctum', '2023-11-02 04:27:46', '2023-11-02 04:27:46'),
+(2, 'Profesor', 'sanctum', '2023-11-02 06:37:05', '2023-11-02 06:37:05');
 
 -- --------------------------------------------------------
 
@@ -376,7 +424,8 @@ CREATE TABLE `role_has_permissions` (
 --
 
 INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
-(1, 1);
+(1, 1),
+(2, 2);
 
 -- --------------------------------------------------------
 
@@ -398,7 +447,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('0ByDCdkaksHjpc6zqFYxJVgRFteFK6vlxQkpeNF2', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiWnJOQWJtdXBoWFp3Mk5qbHpwY0U4Wkd5c0NDelpGMnhLRG5WZ3hYaCI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjI2OiJodHRwOi8vY29sZWdpby50ZXN0L2N1cnNvcyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czoyMToicGFzc3dvcmRfaGFzaF9zYW5jdHVtIjtzOjYwOiIkMnkkMTAkLnFQSkU4Qm5WSGRUUW1sb3pWL29MLjJUTkJ4QVgxLy91WmVXSnMwN2dDVGkwZHdnT2poVUsiO30=', 1698900169);
+('Om3vhY6jascigjNi5aJrnjmHpbO7JCWHark4STo4', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiWmsyN09yVTBZM1pMcWZMUGwzUlhVYXpYY0RnY1NYVmNRTW5UVHkzYyI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjM1OiJodHRwOi8vY29sZWdpby50ZXN0L2p1c3RpZmljYWNpb25lcyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czoyMToicGFzc3dvcmRfaGFzaF9zYW5jdHVtIjtzOjYwOiIkMnkkMTAkLnFQSkU4Qm5WSGRUUW1sb3pWL29MLjJUTkJ4QVgxLy91WmVXSnMwN2dDVGkwZHdnT2poVUsiO30=', 1699011103);
 
 -- --------------------------------------------------------
 
@@ -427,9 +476,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `two_factor_secret`, `two_factor_recovery_codes`, `two_factor_confirmed_at`, `remember_token`, `current_team_id`, `profile_photo_path`, `created_at`, `updated_at`) VALUES
-(1, 'Test User', 'test@example.com', '2023-11-02 04:27:01', '$2y$10$.qPJE8BnVHdTQmlozV/oL.2TNBxAX1//uZeWJs07gCTi0dwgOjhUK', NULL, NULL, NULL, 'G97FqnXbbO', NULL, NULL, '2023-11-02 04:27:01', '2023-11-02 04:27:01'),
-(2, 'ernesto', 'ernesto@gmail.com', NULL, '$2y$10$R2awT03l7OqysfgNmA3taOo0Ib54y93r5hBzruYbqwxoj/aZCKi0S', NULL, NULL, NULL, NULL, NULL, NULL, '2023-11-02 04:29:31', '2023-11-02 04:29:31'),
-(3, 'profesor', 'profe@gmail.com', NULL, '$2y$10$hiZf.twGx5rfQ9FpInyMFOl955kx784ZZ/13zPHUdvW3KrOg2CTXS', NULL, NULL, NULL, NULL, NULL, NULL, '2023-11-02 04:30:12', '2023-11-02 04:30:12');
+(1, 'Test User', 'test@example.com', '2023-11-02 04:27:01', '$2y$10$.qPJE8BnVHdTQmlozV/oL.2TNBxAX1//uZeWJs07gCTi0dwgOjhUK', NULL, NULL, NULL, 'eFIJ1WympLecZNWAIJOkAN2Mz8UwHhie0yWWvRrXW3bDGqwE7hPSh79h8W47', NULL, 'profile-photos/3AHnEGJSKZGRLZvGcIV170nXLLF01JMTYqHRrHJm.jpg', '2023-11-02 04:27:01', '2023-11-03 04:10:47'),
+(2, 'ernesto', 'ernesto@gmail.com', NULL, '$2y$10$R2awT03l7OqysfgNmA3taOo0Ib54y93r5hBzruYbqwxoj/aZCKi0S', NULL, NULL, NULL, NULL, NULL, 'profile-photos/xcL0SJAXfj0R1fCz4r1cEzqZSX49n1K8tzPZqcX0.jpg', '2023-11-02 04:29:31', '2023-11-02 08:09:52'),
+(3, 'profesor', 'profe@gmail.com', NULL, '$2y$10$hiZf.twGx5rfQ9FpInyMFOl955kx784ZZ/13zPHUdvW3KrOg2CTXS', NULL, NULL, NULL, NULL, NULL, NULL, '2023-11-02 04:30:12', '2023-11-02 04:30:12'),
+(4, 'raul', 'raul@gmail.com', NULL, '$2y$10$v7uDXrdIsNDG.B1sScwlYuc8lNx2l5/FBLnYRaTrcblZ5D5PFACtG', NULL, NULL, NULL, NULL, NULL, NULL, '2023-11-02 06:55:05', '2023-11-02 06:55:05'),
+(6, 'profe2', 'profe2@gmail.com', NULL, '$2y$10$52gdUtNDyDtyx96w3x3IC.P7EZPcE2UAWaf8CqcSxGgaLFvA/2NUe', NULL, NULL, NULL, NULL, NULL, NULL, '2023-11-03 07:01:06', '2023-11-03 07:01:06');
 
 --
 -- Indexes for dumped tables
@@ -465,6 +516,14 @@ ALTER TABLE `conducta`
   ADD PRIMARY KEY (`id`),
   ADD KEY `conducta_alumno_id_foreign` (`alumno_id`),
   ADD KEY `conducta_profesor_id_foreign` (`profesor_id`);
+
+--
+-- Indexes for table `conductas`
+--
+ALTER TABLE `conductas`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `conductas_alumno_id_foreign` (`alumno_id`),
+  ADD KEY `conductas_profesor_id_foreign` (`profesor_id`);
 
 --
 -- Indexes for table `cursos`
@@ -591,13 +650,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `alumnos`
 --
 ALTER TABLE `alumnos`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `asignaciones_curso`
 --
 ALTER TABLE `asignaciones_curso`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `asistencias`
@@ -612,16 +671,22 @@ ALTER TABLE `conducta`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `conductas`
+--
+ALTER TABLE `conductas`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `cursos`
 --
 ALTER TABLE `cursos`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `curso_profesor`
 --
 ALTER TABLE `curso_profesor`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -633,13 +698,13 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `justificaciones`
 --
 ALTER TABLE `justificaciones`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `notas`
@@ -651,7 +716,7 @@ ALTER TABLE `notas`
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -663,19 +728,19 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `profesores`
 --
 ALTER TABLE `profesores`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables
@@ -706,6 +771,13 @@ ALTER TABLE `asistencias`
 ALTER TABLE `conducta`
   ADD CONSTRAINT `conducta_alumno_id_foreign` FOREIGN KEY (`alumno_id`) REFERENCES `alumnos` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `conducta_profesor_id_foreign` FOREIGN KEY (`profesor_id`) REFERENCES `profesores` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `conductas`
+--
+ALTER TABLE `conductas`
+  ADD CONSTRAINT `conductas_alumno_id_foreign` FOREIGN KEY (`alumno_id`) REFERENCES `alumnos` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `conductas_profesor_id_foreign` FOREIGN KEY (`profesor_id`) REFERENCES `profesores` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `cursos`
