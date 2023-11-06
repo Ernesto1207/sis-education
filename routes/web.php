@@ -68,4 +68,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::resource('/conducta', ConductaController::class)->names('conducta');
 
     Route::resource('/justificaciones', JustificacionesController::class)->names('justificaciones');
+
+    Route::resource('/notas',NotaController::class)->names('Notas');
 });
