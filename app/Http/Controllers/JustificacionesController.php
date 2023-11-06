@@ -40,12 +40,12 @@ class JustificacionesController extends Controller
             'alumno_id' => 'required',
             'profesor_id' => 'required',
             'descripcion' => 'required',
-            // 'imagen' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'imagen' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $imagenPath = $request->file('imagen')->store('public/images');
 
-        $imagenUrl = asset('storage/' . str_replace('public/', '', $imagenPath));
+        $imagenUrl = asset('storage/' . str_replace('', '', $imagenPath));
 
         // dd($request->all());
         Justificaciones::create([

@@ -58,7 +58,7 @@
                                 Add your teammate to your team and start work to get things done
                             </p> --}}
 
-                        <form class="mt-5" method="POST" action="{{ route('justificaciones.store') }}">
+                        <form class="mt-5" method="POST" action="{{ route('justificaciones.store') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="mb-4">
                                 <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Nombre del
@@ -171,7 +171,8 @@
                             {{ $justificacion->descripcion }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ $justificacion->imagen }}
+                            <a href="{{ asset($justificacion->imagen) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline" target="_blank">Imagen</a>
+                            {{-- {{ $justificacion->imagen }} --}}
                         </td>
                         {{-- Button actions --}}
                         <td class="flex items-center px-6 py-4 space-x-3">
