@@ -78,9 +78,6 @@ class AlumnoController extends Controller
 
         $cursos = $alumno->cursos;
 
-        // if ($notas->count() < 4) {
-        //     return redirect()->back()->with('error', 'No hay suficientes notas para calcular el promedio.');
-        // }
 
         $promedio = $notas->take(4)->avg('valor');
 
