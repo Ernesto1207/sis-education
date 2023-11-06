@@ -75,15 +75,26 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @php
+                            $totalNotas = 0;
+                            $contadorNotas = 0;
+                        @endphp
                         @foreach ($notasPorCurso as $nota)
+                            @php
+                                $totalNotas += $nota->valor;
+                                $contadorNotas++;
+                            @endphp
                             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                <th scope="row"
-                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ $notasPorCurso[0]->curso->nombre }} </th>
-                                <td class="px-6 py-4">{{ $nota->valor }} <br> as</td>
-                                <td class="px-6 py-4">Promedio</td>
+                                <th scope="row">{{ $notasPorCurso[0]->curso->nombre }}</th>
+                                <td class="px-6 py-4">{{ $nota->valor }}</td>
                             </tr>
                         @endforeach
+                        @if ($contadorNotas > 0)
+                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                <th scope="row">Promedio</th>
+                                <td class="px-6 py-4">{{ $totalNotas / $contadorNotas }}</td>
+                            </tr>
+                        @endif
                     </tbody>
                 @endforeach
             </table>
