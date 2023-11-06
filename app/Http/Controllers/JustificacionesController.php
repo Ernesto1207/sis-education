@@ -49,10 +49,10 @@ class JustificacionesController extends Controller
 
         // dd($request->all());
         Justificaciones::create([
-            'alumno_id' => $request->alumno_id, // Asegúrate de tener un campo 'alumno_id' en tu formulario
-            'profesor_id' => $request->profesor_id, // Asegúrate de tener un campo 'profesor_id' en tu formulario
-            'descripcion' => $request->descripcion, // Asegúrate de tener un campo 'descripcion' en tu formulario
-            'imagen' => $imagenUrl, // Guarda la URL pública de la imagen
+            'alumno_id' => $request->alumno_id, 
+            'profesor_id' => $request->profesor_id, 
+            'descripcion' => $request->descripcion, 
+            'imagen' => $imagenUrl, 
         ]);
         // Justificaciones::create($request->all());
 

@@ -16,4 +16,9 @@ class Nota extends Model
     {
         return $this->belongsTo(Curso::class);
     }
+
+    public function alumnos()
+    {
+        return $this->belongsToMany(Alumno::class, 'asignaciones_curso',  'alumno_id');
+    }
 }

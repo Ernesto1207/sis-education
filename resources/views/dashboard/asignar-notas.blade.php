@@ -7,7 +7,7 @@
 
         <label for="curso" class="text-white">Seleccionar Curso:</label>
         <select name="curso_id" id="curso_id" required>
-            @foreach ($cursos as $curso)
+            @foreach ($cursosDelAlumno as $curso)
             <option value="{{ $curso->id }}">{{ $curso->nombre}}</option>
             @endforeach
         </select>

@@ -20,7 +20,7 @@ class NotaController extends Controller
         return view('dashboard.nota');
     }
 
-    
+
     /**
      * Show the form for creating a new resource.
      */
@@ -28,7 +28,6 @@ class NotaController extends Controller
     {
         //
         return ('hola mundo');
-        
     }
 
     /**
@@ -52,13 +51,19 @@ class NotaController extends Controller
         // Obtiene el ID del curso a partir de la solicitud
         $cursoId = $request->curso_id;
 
+        // Verifica si el curso ya tiene 4 notas
+        $notasCurso = Nota::where('curso_id', $cursoId)->count();
+        if ($notasCurso >= 4) {
+            return redirect()->back()->with('error', 'Este curso ya tiene 4 notas.');
+        }
+
         // Crea una nueva instancia de Nota
         $nota = new Nota();
         $nota->alumno_id = $alumno->id;
         $nota->curso_id = $cursoId;
         $nota->valor = $request->valor;
         $nota->save();
-        
+
         // dd($request->all());
         return view('dashboard.nota');
     }
@@ -77,9 +82,10 @@ class NotaController extends Controller
 
         $nombre = $alumno->dni;
         $nombre = $alumno->nombres;
-        $cursos = Curso::all();
+        // $cursos = Curso::all();
+        $cursosDelAlumno = $alumno->cursos;
 
-        return view('dashboard.asignar-notas', compact('dni', 'nombre', 'cursos'));
+        return view('dashboard.asignar-notas', compact('dni', 'nombre', 'cursosDelAlumno'));
     }
 
 

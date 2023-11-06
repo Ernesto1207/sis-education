@@ -8,9 +8,9 @@
         <a href="{{ route('asignar-curso', ['id' => $alumno->id]) }}" class="text-blue-500 hover:underline">Asignar
             Curso</a>
 
-            <p>nombre: {{$alumno->nombres}}</p>
-            <p>Apellido Paterno: {{$alumno->apellido_paterno}}</p>
-            <p>Apellido Materno: {{$alumno->apellido_materno}}</p>
+        <p>nombre: {{ $alumno->nombres }}</p>
+        <p>Apellido Paterno: {{ $alumno->apellido_paterno }}</p>
+        <p>Apellido Materno: {{ $alumno->apellido_materno }}</p>
 
         <h3 class="text-xl font-semibold mt-6 mb-2">Cursos del Alumno</h3>
         @if ($cursos->count() > 0)
@@ -57,19 +57,37 @@
 
         {{-- <h1 class=" text-3xl">{{ $alumno->nombre }}</h1> --}}
 
-        <h2>Cursos:</h2>
-        <ul>
-            @foreach ($cursos as $curso)
-                <li>{{ $curso->nombre }}</li>
-            @endforeach
-        </ul>
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <table class="w-full text-sm text-center text-gray-500 dark:text-gray-400 ">
 
-        <h2>Notas:</h2>
-        <ul>
-            @foreach ($notas as $nota)
-                <li>Curso: {{ $nota->curso->nombre }} -- Nota: {{ $nota->valor }}</li>
-            @endforeach
-        </ul>
+                @foreach ($notas->groupBy('curso_id') as $cursoId => $notasPorCurso)
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">
+                                Curso
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Notas
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Promedio
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($notasPorCurso as $nota)
+                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                <th scope="row"
+                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    {{ $notasPorCurso[0]->curso->nombre }} </th>
+                                <td class="px-6 py-4">{{ $nota->valor }} <br> as</td>
+                                <td class="px-6 py-4">Promedio</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                @endforeach
+            </table>
+        </div>
     </div>
 
 
