@@ -131,46 +131,49 @@
 
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
             <table class="w-full text-sm text-center text-gray-500 dark:text-gray-400 ">
+                @if ($notas->count() > 0)
+                    @foreach ($notas->groupBy('curso_id') as $cursoId => $notasPorCurso)
+                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                            <tr>
+                                <th scope="col" class="px-6 py-3">
+                                    Curso
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Notas
+                                </th>
 
-                @foreach ($notas->groupBy('curso_id') as $cursoId => $notasPorCurso)
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                        <tr>
-                            <th scope="col" class="px-6 py-3">
-                                Curso
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Notas
-                            </th>
-
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @php
-                            $totalNotas = 0;
-                            $contadorNotas = 0;
-                        @endphp
-                        @foreach ($notasPorCurso as $nota)
+                            </tr>
+                        </thead>
+                        <tbody>
                             @php
-                                $totalNotas += $nota->valor;
-                                $contadorNotas++;
+                                $totalNotas = 0;
+                                $contadorNotas = 0;
                             @endphp
-                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                <th scope="row"
-                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ $notasPorCurso[0]->curso->nombre }}</th>
-                                <td class="px-6 py-4">{{ $nota->valor }}</td>
-                            </tr>
-                        @endforeach
-                        @if ($contadorNotas > 0)
-                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                <th scope="row"
-                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    Promedio</th>
-                                <td class="px-6 py-4">{{ $totalNotas / $contadorNotas }}</td>
-                            </tr>
-                        @endif
-                    </tbody>
-                @endforeach
+                            @foreach ($notasPorCurso as $nota)
+                                @php
+                                    $totalNotas += $nota->valor;
+                                    $contadorNotas++;
+                                @endphp
+                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                    <th scope="row"
+                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{ $notasPorCurso[0]->curso->nombre }}</th>
+                                    <td class="px-6 py-4">{{ $nota->valor }}</td>
+                                </tr>
+                            @endforeach
+                            @if ($contadorNotas > 0)
+                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                    <th scope="row"
+                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        Promedio</th>
+                                    <td class="px-6 py-4">{{ $totalNotas / $contadorNotas }}</td>
+                                </tr>
+                            @endif
+                        </tbody>
+                    @endforeach
+                @else
+                    <p>Sin Cursos asignados para tener notas</p>
+                @endif
             </table>
         </div>
     </div>
