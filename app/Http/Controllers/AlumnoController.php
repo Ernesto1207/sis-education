@@ -75,16 +75,69 @@ class AlumnoController extends Controller
         }
 
         $notas = $alumno->notas;
-        
+
         $cursos = $alumno->cursos;
 
-        if ($notas->count() < 4) {
-            return redirect()->back()->with('error', 'No hay suficientes notas para calcular el promedio.');
-        }
+        // if ($notas->count() < 4) {
+        //     return redirect()->back()->with('error', 'No hay suficientes notas para calcular el promedio.');
+        // }
 
         $promedio = $notas->take(4)->avg('valor');
 
-        return view('dashboard.show', compact('alumno', 'cursos', 'notas', 'promedio'));
+        $dia1 = 'lunes';
+        $dia2 = 'martes';
+        $dia3 = 'miercoles';
+        $dia4 = 'jueves';
+        $dia5 = 'viernes';
+        $dia6 = 'sabado';
+
+
+        $cursosLunes = $alumno->cursos
+            ->filter(function ($curso) use ($dia1) {
+                return $curso->dias_semana === $dia1;
+            })
+            ->sortBy('horario_entrada');
+
+        $cursosMartes = $alumno->cursos
+            ->filter(function ($curso) use ($dia2) {
+                return $curso->dias_semana === $dia2;
+            })
+            ->sortBy('horario_entrada');
+
+        $cursosMiercoles = $alumno->cursos
+            ->filter(function ($curso) use ($dia3) {
+                return $curso->dias_semana === $dia3;
+            })->sortBy('horario_entrada');
+
+        $cursosJueves = $alumno->cursos
+            ->filter(function ($curso) use ($dia4) {
+                return $curso->dias_semana === $dia4;
+            })->sortBy('horario_entrada');
+
+        $cursosViernes = $alumno->cursos
+            ->filter(function ($curso) use ($dia5) {
+                return $curso->dias_semana === $dia5;
+            })->sortBy('horario_entrada');
+
+        $cursosSabado = $alumno->cursos
+            ->filter(function ($curso) use ($dia6) {
+                return $curso->dias_semana === $dia6;
+            })->sortBy('horario_entrada');
+
+        return view('dashboard.show', compact(
+            'alumno', 
+            'cursos', 
+            'notas', 
+            'promedio',
+            'cursosLunes',
+            'cursosMartes',
+            'cursosMiercoles',
+            'cursosJueves',
+            'cursosViernes',
+            'cursosSabado'
+        ));
+
+        // dd($id);
     }
 
     /**

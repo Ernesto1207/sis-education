@@ -83,7 +83,7 @@ class ProfesoresController extends Controller
         if (!$profesores) {
             return redirect()->route('profesores.index');
         }
-        return view('dashboard.editprofesores', compact('alumno'));
+        return view('dashboard.editprofesores', compact('profesores'));
     }
 
     /**
