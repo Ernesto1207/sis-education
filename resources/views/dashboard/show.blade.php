@@ -18,7 +18,7 @@
             <div class="flex-1 rounded-lg shadow-xl mt-4 p-8">
                 <h4 class="text-xl text-gray-900 dark:text-white font-bold">Calendario de Horarios de Cursos</h4>
                 <div class="relative px-4 py-2">
-                    <div class="grid grid-cols-6 gap-2">
+                    <div class="grid grid-cols-6 gap-2 ">
                         <div class="text-center">Lunes</div>
                         <div class="text-center">Martes</div>
                         <div class="text-center">Miércoles</div>
@@ -27,7 +27,7 @@
                         <div class="text-center">Sábado</div>
 
 
-                        <div class=" p-2 text-center flow-root ">
+                        <div class=" p-2 text-center flow-root text-gray-400">
                             @if ($cursosLunes->isEmpty())
                                 <p>Sin Asignar</p>
                             @else
@@ -42,7 +42,7 @@
                             @endif
                         </div>
 
-                        <div class=" p-2 text-center">
+                        <div class=" p-2 text-center text-gray-400">
                             @if ($cursosMartes->isEmpty())
                                 <p>Sin Asignar</p>
                             @else
@@ -57,7 +57,7 @@
                             @endif
                         </div>
 
-                        <div class=" p-2 text-center">
+                        <div class=" p-2 text-center text-gray-400">
                             @if ($cursosMiercoles->isEmpty())
                                 <p>Sin Asignar</p>
                             @else
@@ -72,7 +72,7 @@
                             @endif
                         </div>
 
-                        <div class="p-2 text-center">
+                        <div class="p-2 text-center text-gray-400">
                             @if ($cursosJueves->isEmpty())
                                 <p>Sin Asignar</p>
                             @else
@@ -87,7 +87,7 @@
                             @endif
                         </div>
 
-                        <div class=" p-2 text-center">
+                        <div class=" p-2 text-center text-gray-400">
                             @if ($cursosViernes->isEmpty())
                                 <p>Sin Asignar</p>
                             @else
@@ -102,14 +102,14 @@
                             @endif
                         </div>
 
-                        <div class=" p-2 text-center">
+                        <div class=" p-2 text-center text-gray-400">
                             @if ($cursosSabado->isEmpty())
                                 <p>Sin Asignar</p>
                             @else
                                 @foreach ($cursosSabado as $curso)
                                     <ul>
-                                        <li>{{ ucfirst($curso->nombre) }}</li>
-                                        <li>{{ $curso->horario_entrada }}</li>
+                                        <li class="text-gray-700">{{ ucfirst($curso->nombre) }}</li>
+                                        <li class="text-gray-700">{{ $curso->horario_entrada }}</li>
                                         <li>{{ $curso->horario_salida }}</li>
                                         <li><br></li>
                                     </ul>
