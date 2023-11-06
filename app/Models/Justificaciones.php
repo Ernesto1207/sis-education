@@ -9,7 +9,7 @@ class Justificaciones extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['alumno_id', 'profesor_id', 'descripcion'];
+    protected $fillable = ['alumno_id', 'profesor_id', 'descripcion','imagen'];
 
     public function alumno()
     {

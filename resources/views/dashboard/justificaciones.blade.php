@@ -87,6 +87,12 @@
                                 <textarea name="descripcion" id="descripcion" class="form-textarea w-full" rows="4" required></textarea>
                             </div>
 
+                            <div class="mb-4">
+                                <label for="descripcion" class="block mb-2">Imagen:</label>
+                                <span class="text-gray-600">Opcional</span>
+                                <input type="file" name="imagen" id="imagen" accept="image/*">
+                            </div>
+
                             <div class="mt-6">
                                 <button type="submit"
                                     class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Guardar
@@ -127,6 +133,9 @@
                     <th scope="col" class="px-6 py-3">
                         Descripcion
                     </th>
+                    <th scope="col" class="px-6 py-3">
+                        Archivo
+                    </th>
                     <th scope="col" class="px-9 py-3 ">
                         Accion
                     </th>
@@ -161,7 +170,10 @@
                         <td class="px-6 py-4">
                             {{ $justificacion->descripcion }}
                         </td>
-
+                        <td class="px-6 py-4">
+                            {{ $justificacion->imagen }}
+                        </td>
+                        {{-- Button actions --}}
                         <td class="flex items-center px-6 py-4 space-x-3">
                             @if (auth()->user()->can('editar usuarios') || auth()->user()->can('administrador'))
                             <div x-data="{ menuOpen: false, wideInfoModal: false}">
@@ -189,6 +201,7 @@
                                                 <textarea id="descripcion" name="descripcion" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-500 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                                     {{$justificacion->descripcion}}
                                                 </textarea>
+                                                <input type="file" name="imagen" id="imagen" accept="image/*" value="{{ $justificacion->imagen }}">
                                                 <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Enviar</button>
                                             </form>
                                         </div>

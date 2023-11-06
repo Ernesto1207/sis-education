@@ -8,7 +8,7 @@ $fechaMaxima = date('Y-m-d', strtotime('-10 years'));
 
         <p class="text-gray-800 dark:text-gray-300">ID: {{ $user->id }}</p>
         <input type="hidden" name="user_id" value="{{ $user->id }}">
-        <p class="text-gray-800 dark:text-gray-300">Nombre: {{ $user->name }}</p>
+        <p class="text-gray-800 dark:text-gray-300">Nombre de Usuario: {{ $user->name }}</p>
         <p class="text-gray-800 dark:text-gray-300">Correo Electrónico: {{ $user->email }}</p>
 
         <!-- DNI -->

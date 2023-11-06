@@ -19,7 +19,7 @@ class JustificacionesController extends Controller
         $alumnos = alumno::all();
         $profesores = profesores::all();
 
-        return view('dashboard.justificaciones', compact('justificaciones','alumnos', 'profesores'));
+        return view('dashboard.justificaciones', compact('justificaciones', 'alumnos', 'profesores'));
     }
 
     /**
@@ -40,8 +40,21 @@ class JustificacionesController extends Controller
             'alumno_id' => 'required',
             'profesor_id' => 'required',
             'descripcion' => 'required',
+            // 'imagen' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-        Justificaciones::create($request->all());
+
+        $imagenPath = $request->file('imagen')->store('public/images');
+
+        $imagenUrl = asset('storage/' . str_replace('public/', '', $imagenPath));
+
+        // dd($request->all());
+        Justificaciones::create([
+            'alumno_id' => $request->alumno_id, // Asegúrate de tener un campo 'alumno_id' en tu formulario
+            'profesor_id' => $request->profesor_id, // Asegúrate de tener un campo 'profesor_id' en tu formulario
+            'descripcion' => $request->descripcion, // Asegúrate de tener un campo 'descripcion' en tu formulario
+            'imagen' => $imagenUrl, // Guarda la URL pública de la imagen
+        ]);
+        // Justificaciones::create($request->all());
 
         return redirect()->route('justificaciones.index')->with('success', 'Justificaciones registrada exitosamente.');
     }
