@@ -5,6 +5,21 @@
         </h2>
     </x-slot>
     <x-section-border />
+
+    <form action="{{ route('alumnos.index') }}" method="GET" class="mb-4">
+        @csrf
+        <div class="flex items-center space-x-4">
+            <div class="w-1/2">
+                <input type="text"
+                    class="w-full border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring focus:ring-indigo-200 dark:text-zinc-950"
+                    id="search" name="search" placeholder="DNI o Nombre" >
+            </div>
+            <button type="submit"
+                class="bg-indigo-500 text-white py-2 px-4 rounded-md hover:bg-indigo-600 focus:outline-none focus:ring focus:ring-indigo-200">
+                Buscar
+            </button>
+        </div>
+    </form>
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -28,7 +43,7 @@
                         Fecha de Nacimiento
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Ciudad  
+                        Ciudad
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Direccion
@@ -75,18 +90,19 @@
                         </td>
 
                         <td class="flex items-center px-6 py-4 space-x-3">
-                            @if (auth()->user()->can('editar usuarios') || auth()->user()->can('administrador'))
-                            <a href=" {{route('alumnos.edit', $alumno)}} "
-                                class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                            @if (auth()->user()->can('editar usuarios') ||
+                                    auth()->user()->can('administrador'))
+                                <a href=" {{ route('alumnos.edit', $alumno) }} "
+                                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
                             @endcan
-                            <form action="{{ route('alumnos.show', ['alumno' => $alumno->id]) }}"
-                                method="GET">
+                            <form action="{{ route('alumnos.show', ['alumno' => $alumno->id]) }}" method="GET">
                                 <button type="submit"
                                     class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Ver
                                     Perfil</button>
                             </form>
-                            @if (auth()->user()->can('eliminar usuarios') || auth()->user()->can('administrador'))
-                                <form action=" {{route('alumnos.destroy', $alumno->id)}} " method="POST"
+                            @if (auth()->user()->can('eliminar usuarios') ||
+                                    auth()->user()->can('administrador'))
+                                <form action=" {{ route('alumnos.destroy', $alumno->id) }} " method="POST"
                                     class="font-medium text-red-600 dark:text-red-500 hover:underline cursor-pointer">
                                     @csrf
                                     @method('delete')
@@ -94,14 +110,15 @@
                                 </form>
                             @endcan
 
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
-    <div class="pagination">
-    </div>
+                </td>
+            </tr>
+        @endforeach
+    </tbody>
+</table>
+</div>
+<div class="pagination">
+    {{ $alumnos->links() }}
+</div>
 
-    <x-section-border />
+<x-section-border />
 </x-app-layout>

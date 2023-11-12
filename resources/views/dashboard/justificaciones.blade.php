@@ -202,7 +202,7 @@
                                                 <textarea id="descripcion" name="descripcion" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-500 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                                     {{$justificacion->descripcion}}
                                                 </textarea>
-                                                <input type="file" name="imagen" id="imagen" accept="image/*" value="{{ $justificacion->imagen }}">
+                                                {{-- <input type="file" name="imagen" id="imagen" accept="image/*" value="{{ $justificacion->imagen }}"> --}}
                                                 <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Enviar</button>
                                             </form>
                                         </div>
@@ -233,16 +233,20 @@
     $(document).ready(function() {
         $('.edit-button').click(function() {
             var justificacion = $(this).data('justificacion-id');
-
-            $.ajax({
-                url: '{{ route("justificaciones.edit",$justificacion) }}' + justificacion,
+            if (justificacion) {
+                $.ajax({
+                url: '{{ route("justificaciones.edit", ":justificacionId") }}'.replace(':justificacionId', justificacion),
                 type: 'GET',
                 success: function(response) {
                     $('#modal-body').html(response);
                     $('#editModal').modal('show');
-                }
-            });
+                }});
+            }else{
+                
+            }
         });
     });
 </script>
 </x-app-layout>
+
+

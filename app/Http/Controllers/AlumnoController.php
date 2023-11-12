@@ -15,10 +15,32 @@ class AlumnoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): View
+    public function index(Request $request): View
     {
         //
-        $alumnos = Alumno::with('user')->oldest()->paginate(10);
+        $alumnos = Alumno::with('user')->oldest()->paginate(1);
+
+        $query = $request->input('search');
+
+        // Busca el alumno en la tabla de alumnos
+        // $alumnos = Alumno::where('dni', 'like', "%$query%")
+        //     ->orWhere('nombres', 'like', "%$query%")
+        //     ->first();
+
+        $alumnos = Alumno::with('user')
+            ->where('dni', 'like', "%$query%")
+            ->orWhere('nombres', 'like', "%$query%")
+            ->paginate(10);
+
+        if ($alumnos) {
+            // Si se encuentra el alumno, muestra los detalles del alumno
+            return view('dashboard.alumnos', compact('alumnos'));
+        } else {
+            // Si no se encuentra el alumno, puedes mostrar un mensaje o redirigir a la página principal, según tus necesidades.
+            $mensaje = 'No se encontraron resultados para la búsqueda.';
+            return view('dashboard.alumnos', compact('mensaje'));
+        }
+
         return view('dashboard.alumnos', compact('alumnos'));
     }
 
@@ -122,9 +144,9 @@ class AlumnoController extends Controller
             })->sortBy('horario_entrada');
 
         return view('dashboard.show', compact(
-            'alumno', 
-            'cursos', 
-            'notas', 
+            'alumno',
+            'cursos',
+            'notas',
             'promedio',
             'cursosLunes',
             'cursosMartes',

@@ -16,20 +16,22 @@ class AsistenciaController extends Controller
     {
         $asistencias = Asistencia::all();
         // return view('dashboard.asistencia', compact('asistencias'));
-        $search = $request->input('search');
+        $query = $request->input('search');
 
-        $query = Alumno::query();
+        // Busca el alumno en la tabla de alumnos
+        $alumno = Alumno::where('dni', 'like', "%$query%")
+            ->orWhere('nombres', 'like', "%$query%")
+            ->first();
 
-        if ($search) {
-            $query->where('nombres', 'like', "%$search%")
-                ->orWhere('dni', 'like', "%$search%");
+        if ($alumno) {
+            // Si se encuentra el alumno, busca en la tabla de asistencias utilizando el id_alumno
+            $asistencias = Asistencia::where('alumno_id', $alumno->id)
+                ->get();
+
+            return view('dashboard.asistencia', compact('asistencias'));
         }
 
-        $alumnos = $query->with(['asistencias' => function ($query) {
-            $query->select('alumno_id', 'estado', 'fecha');
-        }])->get();
-
-        return view('dashboard.asistencia', compact('asistencias','alumnos'));
+        return view('dashboard.asistencia', compact('asistencias', 'alumno'));
     }
 
     /**
@@ -123,13 +125,24 @@ class AsistenciaController extends Controller
 
     // public function buscar(Request $request)
     // {
-    //     $query = $request->input('query');
+    //     $query = $request->input('search');
 
-    //     // Realiza la búsqueda en la tabla de asistencia
-    //     $asistencia = Asistencia::where('dni', 'like', "%$query%")
-    //         ->orWhere('nombre', 'like', "%$query%")
-    //         ->get();
+    //     // Busca el alumno en la tabla de alumnos
+    //     $alumno = Alumno::where('dni', 'like', "%$query%")
+    //         ->orWhere('nombres', 'like', "%$query%")
+    //         ->first();
 
-    //     return view('dashboard.asistencia', compact('asistencia'));
+    //     if ($alumno) {
+    //         // Si se encuentra el alumno, busca en la tabla de asistencias utilizando el id_alumno
+    //         $asistencia = Asistencia::where('alumno_id', $alumno->id)
+    //             ->get();
+
+    //         return view('dashboard.asistencia', compact('asistencia'));
+    //     } else {
+    //         // Si no se encuentra el alumno, puedes manejar el caso en consecuencia (por ejemplo, mostrar un mensaje de que no se encontraron resultados).
+    //         return view('dashboard.asistencia', compact('asistencia'));
+    //     }
+
+    //     // return view('dashboard.asistencia', compact('asistencia'));
     // }
 }
