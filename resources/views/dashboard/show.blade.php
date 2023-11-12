@@ -9,9 +9,9 @@
             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue active:bg-blue-800">Asignar
             Curso</a>
         <div class="flex flex-row gap-10 my-3">
-            <p>nombre: {{ $alumno->nombres }}</p>
-            <p>Apellido Paterno: {{ $alumno->apellido_paterno }}</p>
-            <p>Apellido Materno: {{ $alumno->apellido_materno }}</p>
+            <p>nombre: {{ ucfirst($alumno->nombres) }}</p>
+            <p>Apellido Paterno: {{ ucfirst($alumno->apellido_paterno) }}</p>
+            <p>Apellido Materno: {{ ucfirst($alumno->apellido_materno) }}</p>
         </div>
 
         @if ($cursos->count() > 0)
@@ -157,12 +157,12 @@
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                     <th scope="row"
                                         class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ $notasPorCurso[0]->curso->nombre }}</th>
+                                        {{ ucfirst($notasPorCurso[0]->curso->nombre) }}</th>
                                     <td class="px-6 py-4">{{ $nota->valor }}</td>
                                 </tr>
                             @endforeach
                             @if ($contadorNotas > 0)
-                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                <tr class="text-white box-content bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                     <th scope="row"
                                         class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         Promedio</th>

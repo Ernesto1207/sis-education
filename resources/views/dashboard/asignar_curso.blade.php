@@ -60,10 +60,8 @@
             var cursoSelect = document.getElementById('curso_id');
             var horarioInput = document.getElementById('horario');
 
-            // Obten el valor del horario desde el atributo 'data-horario' del elemento seleccionado
             var horarioSeleccionado = cursoSelect.options[cursoSelect.selectedIndex].getAttribute('data-horario');
 
-            // Actualiza el valor del input del horario con el horario seleccionado
             horarioInput.value = horarioSeleccionado;
         }
     </script>

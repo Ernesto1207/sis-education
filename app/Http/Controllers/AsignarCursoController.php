@@ -46,13 +46,13 @@ class AsignarCursoController extends Controller
 
         $alumno = Alumno::find($request->input('alumno_id'));
         $curso = Curso::find($request->input('curso_id'));
-        $curso = Curso::find($request);
+        // $curso = Curso::find($request);
         $horario = $request->input('horario');
 
-        // Asignar el curso al alumno con el horario
         $alumno->cursos()->attach($curso, ['horario' => $horario]);
 
         return redirect()->route('alumnos.show', ['alumno' => $alumno->id])->with('success', 'Curso asignado exitosamente.');
+        // dd($request->all());
     }
 
     /**
