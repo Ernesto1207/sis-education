@@ -34,7 +34,7 @@
                 </div>
                 <div class="h-50 ml-4 flex w-auto flex-col justify-center">
                     <p class="font-dm text-sm font-medium text-gray-600">Alumnos</p>
-                    <h4 class="text-xl font-bold text-navy-700 dark:text-white"> </h4>
+                    <h4 class="text-xl font-bold text-navy-700 dark:text-white"> 200 </h4>
                 </div>
             </div>
 
@@ -142,7 +142,7 @@
         </div>
     </div>
 
-    <div class="grid grid-cols-2 gap-20">
+    <div class="grid grid-cols-2 gap-20 pt-20">
         <div class="shadow-lg rounded-lg overflow-hidden">
             <div class="py-3 px-5 bg-gray-900 text-white">Bar chart</div>
             <canvas class="" id="chartBar"></canvas>
