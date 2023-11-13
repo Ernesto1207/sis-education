@@ -170,7 +170,7 @@
         const dataBarChart = {
             labels: labelsBarChart,
             datasets: [{
-                label: "My First dataset",
+                label: "Alumnos",
                 backgroundColor: "hsl(252, 82.9%, 67.8%)",
                 borderColor: "hsl(252, 82.9%, 67.8%)",
                 data: [12, 10, 5, 2, 20, 30, 45],
@@ -191,9 +191,9 @@
 
 
         const dataPie = {
-            labels: ["JavaScript", "Python", "Ruby"],
+            labels: ["Asistencias", "Tardanzas", "Faltas"],
             datasets: [{
-                label: "My First Dataset",
+                label: "Asistencias",
                 data: [300, 50, 100],
                 backgroundColor: [
                     "rgb(133, 105, 241)",
