@@ -34,7 +34,7 @@
                 </div>
                 <div class="h-50 ml-4 flex w-auto flex-col justify-center">
                     <p class="font-dm text-sm font-medium text-gray-600">Alumnos</p>
-                    <h4 class="text-xl font-bold text-navy-700 dark:text-white"> 200 </h4>
+                    <h4 class="text-xl font-bold text-navy-700 dark:text-white"> {{$alumnos}} </h4>
                 </div>
             </div>
 
@@ -54,7 +54,7 @@
                 </div>
                 <div class="h-50 ml-4 flex w-auto flex-col justify-center">
                     <p class="font-dm text-sm font-medium text-gray-600">Profesores</p>
-                    <h4 class="text-xl font-bold text-navy-700 dark:text-white">145</h4>
+                    <h4 class="text-xl font-bold text-navy-700 dark:text-white"> {{$profesores}} </h4>
                 </div>
             </div>
 
@@ -73,7 +73,7 @@
                 </div>
                 <div class="h-50 ml-4 flex w-auto flex-col justify-center">
                     <p class="font-dm text-sm font-medium text-gray-600">Cursos</p>
-                    <h4 class="text-xl font-bold text-navy-700 dark:text-white">$2433</h4>
+                    <h4 class="text-xl font-bold text-navy-700 dark:text-white"> {{$cursos}} </h4>
                 </div>
             </div>
 

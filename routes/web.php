@@ -6,6 +6,7 @@ use App\Http\Controllers\AsignarCursoController;
 use App\Http\Controllers\AsistenciaController;
 use App\Http\Controllers\ConductaController;
 use App\Http\Controllers\CursoController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JustificacionesController;
 use App\Http\Controllers\NotaController;
 use App\Http\Controllers\PerfilController;
@@ -33,9 +34,8 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    
     Route::resource('/alumnos', AlumnoController::class)->names('alumnos');
 
     Route::resource('/profesores', ProfesoresController::class)->names('profesores');
