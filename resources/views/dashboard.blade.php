@@ -213,11 +213,15 @@
 
 
         // GRAFICO 2
+        const ruta = '{{ route('dashboard') }}';
+
+        const asistenciasCount = @json($asistenciasCount);
+
         const dataPie = {
             labels: ["Asistencias", "Tardanzas", "Faltas"],
             datasets: [{
                 label: "Asistencias",
-                data: [300, 50, 100],
+                data: [asistenciasCount.Asistio, asistenciasCount.tardanzas, asistenciasCount.faltas],
                 backgroundColor: [
                     "rgb(133, 105, 241)",
                     "rgb(164, 101, 241)",
@@ -233,43 +237,5 @@
             options: {},
         };
         var chartBar = new Chart(document.getElementById("chartPie"), configPie);
-
-
-
-
-
-        // fetch({{ route('dashboard') }})
-        //     .then(response => response.json())
-        //     .then(data => {
-        //         // Procesa los datos y genera el gráfico de pastel
-        //         const dataPie = {
-        //             labels: ["Asistencias", "Tardanzas", "Faltas"],
-        //             datasets: [{
-        //                 label: "Asistencias",
-        //                 data: [data.asistencias, data.tardanzas, data.faltas],
-        //                 backgroundColor: [
-        //                     "rgb(133, 105, 241)",
-        //                     "rgb(164, 101, 241)",
-        //                     "rgb(101, 143, 241)",
-        //                 ],
-        //                 hoverOffset: 4,
-        //             }],
-        //         };
-
-        //         const configPie = {
-        //             type: "pie",
-        //             data: dataPie,
-        //             options: {},
-        //         };
-
-        //         // Crea el gráfico de pastel
-        //         var chartPie = new Chart(
-        //             document.getElementById("chartPie"),
-        //             configPie
-        //         );
-        //     })
-        //     .catch(error => console.error('Error al obtener los datos:', error));
-
-        // console.log(asistenciasCount);
     </script>
 </x-app-layout>

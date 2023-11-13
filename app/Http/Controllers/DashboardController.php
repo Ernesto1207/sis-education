@@ -37,8 +37,10 @@ class DashboardController extends Controller
             'faltas' => $asistencias->where('estado', 'Falta')->count(),
         ];
 
+        
 
-        //  dd($asistenciasCount);
+
+        // dd($asistenciasCount);
 
 
         return view('dashboard', compact('alumnos', 'profesores', 'cursos', 'datos', 'asistenciasCount'));
