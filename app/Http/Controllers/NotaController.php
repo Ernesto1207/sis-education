@@ -80,12 +80,14 @@ class NotaController extends Controller
             return redirect()->back()->with('error', 'El alumno no existe');
         }
 
-        $nombre = $alumno->dni;
+        $dni = $alumno->dni;
         $nombre = $alumno->nombres;
+        $apellidoM = $alumno->apellido_materno;
+        $apellidoP = $alumno->apellido_paterno;
         // $cursos = Curso::all();
         $cursosDelAlumno = $alumno->cursos;
 
-        return view('dashboard.asignar-notas', compact('dni', 'nombre', 'cursosDelAlumno'));
+        return view('dashboard.asignar-notas', compact('dni', 'nombre', 'apellidoP' , 'apellidoM' ,'cursosDelAlumno'));
     }
 
 
