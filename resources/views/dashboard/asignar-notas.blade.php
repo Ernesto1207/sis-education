@@ -73,8 +73,8 @@
                     <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="Nota">
                         Nota
                     </label>
-                    <input class="appearance-none block w-full bg-transparent rounded py-3 px-4" type="text"
-                        name="valor" id="valor" placeholder="0 - 20">
+                    <input class="appearance-none block w-full bg-transparent rounded py-3 px-4" type="number"
+                        name="valor" id="valor" placeholder="0 - 20" min-="0" max="20">
                 </div>
             </div>
 
