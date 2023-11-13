@@ -220,7 +220,7 @@
         const dataPie = {
             labels: ["Asistencias", "Tardanzas", "Faltas"],
             datasets: [{
-                label: "Asistencias",
+                label: "",
                 data: [asistenciasCount.Asistio, asistenciasCount.tardanzas, asistenciasCount.faltas],
                 backgroundColor: [
                     "rgb(133, 105, 241)",
