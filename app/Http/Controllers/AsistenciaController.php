@@ -71,7 +71,7 @@ class AsistenciaController extends Controller
         $hora_inicio_falta = now()->setHour(9)->setMinute(0)->setSecond(0);
 
         // Determinar el estado en función de la hora actual
-        $estado = 'Asistió'; // Valor predeterminado
+        $estado = 'Asistio'; // Valor predeterminado
 
         if ($hora_actual > $hora_inicio_tardanza) {
             $estado = 'Tardanza';

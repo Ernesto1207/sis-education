@@ -34,7 +34,7 @@
                 </div>
                 <div class="h-50 ml-4 flex w-auto flex-col justify-center">
                     <p class="font-dm text-sm font-medium text-gray-600">Alumnos</p>
-                    <h4 class="text-xl font-bold text-navy-700 dark:text-white"> {{$alumnos}} </h4>
+                    <h4 class="text-xl font-bold text-navy-700 dark:text-white"> {{ $alumnos }} </h4>
                 </div>
             </div>
 
@@ -54,7 +54,7 @@
                 </div>
                 <div class="h-50 ml-4 flex w-auto flex-col justify-center">
                     <p class="font-dm text-sm font-medium text-gray-600">Profesores</p>
-                    <h4 class="text-xl font-bold text-navy-700 dark:text-white"> {{$profesores}} </h4>
+                    <h4 class="text-xl font-bold text-navy-700 dark:text-white"> {{ $profesores }} </h4>
                 </div>
             </div>
 
@@ -73,7 +73,7 @@
                 </div>
                 <div class="h-50 ml-4 flex w-auto flex-col justify-center">
                     <p class="font-dm text-sm font-medium text-gray-600">Cursos</p>
-                    <h4 class="text-xl font-bold text-navy-700 dark:text-white"> {{$cursos}} </h4>
+                    <h4 class="text-xl font-bold text-navy-700 dark:text-white"> {{ $cursos }} </h4>
                 </div>
             </div>
 
@@ -158,23 +158,46 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script>
-        const labelsBarChart = [
-            "January",
-            "February",
-            "March",
-            "April",
-            "May",
-            "June",
-            "July",
+        // grafico 1
+        const meses = [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
         ];
+        const meses1 = [
+            "Enero",
+            "Febrero",
+            "Marzo",
+            "Abril",
+            "Mayo",
+            "Junio",
+            "Julio",
+            "Agosto",
+            "Septiembre",
+            "Octubre",
+            "Noviembre",
+            "Diciembre",
+        ];
+
+        const datos = {!! json_encode($datos) !!};
+
         const dataBarChart = {
-            labels: labelsBarChart,
+            labels: meses1,
             datasets: [{
                 label: "Alumnos",
                 backgroundColor: "hsl(252, 82.9%, 67.8%)",
                 borderColor: "hsl(252, 82.9%, 67.8%)",
-                data: [12, 10, 5, 2, 20, 30, 45],
-            }, ],
+                data: meses.map((mes) => datos[mes] || 0),
+            }],
         };
 
         const configBarChart = {
@@ -189,7 +212,7 @@
         );
 
 
-
+        // GRAFICO 2
         const dataPie = {
             labels: ["Asistencias", "Tardanzas", "Faltas"],
             datasets: [{
@@ -209,7 +232,44 @@
             data: dataPie,
             options: {},
         };
-
         var chartBar = new Chart(document.getElementById("chartPie"), configPie);
+
+
+
+
+
+        // fetch({{ route('dashboard') }})
+        //     .then(response => response.json())
+        //     .then(data => {
+        //         // Procesa los datos y genera el gráfico de pastel
+        //         const dataPie = {
+        //             labels: ["Asistencias", "Tardanzas", "Faltas"],
+        //             datasets: [{
+        //                 label: "Asistencias",
+        //                 data: [data.asistencias, data.tardanzas, data.faltas],
+        //                 backgroundColor: [
+        //                     "rgb(133, 105, 241)",
+        //                     "rgb(164, 101, 241)",
+        //                     "rgb(101, 143, 241)",
+        //                 ],
+        //                 hoverOffset: 4,
+        //             }],
+        //         };
+
+        //         const configPie = {
+        //             type: "pie",
+        //             data: dataPie,
+        //             options: {},
+        //         };
+
+        //         // Crea el gráfico de pastel
+        //         var chartPie = new Chart(
+        //             document.getElementById("chartPie"),
+        //             configPie
+        //         );
+        //     })
+        //     .catch(error => console.error('Error al obtener los datos:', error));
+
+        // console.log(asistenciasCount);
     </script>
 </x-app-layout>
