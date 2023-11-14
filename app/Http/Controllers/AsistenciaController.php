@@ -48,19 +48,27 @@ class AsistenciaController extends Controller
      */
     public function store(Request $request)
     {
-        //
         $request->validate([
             'dni' => 'required|numeric|digits:8',
         ]);
 
-        $dni = $request->input('dni');
+        $dni = strtoupper($request->input('dni'));
+        $fecha_actual = now()->toDateString(); // Obtiene la fecha actual en formato Y-m-d
 
         // Buscar al alumno por DNI
-        $dni = strtoupper($dni);
         $alumno = Alumno::where('dni', $dni)->first();
 
         if (!$alumno) {
             return redirect()->back()->with('error', 'El alumno no existe');
+        }
+
+        // Buscar si ya hay una asistencia registrada para el alumno en la fecha actual
+        $asistenciaExistente = Asistencia::where('alumno_id', $alumno->id)
+            ->whereDate('fecha', $fecha_actual)
+            ->first();
+
+        if ($asistenciaExistente) {
+            return redirect()->back()->with('error', 'Ya se registró asistencia para este alumno hoy');
         }
 
         // Calcular la hora actual
@@ -85,11 +93,13 @@ class AsistenciaController extends Controller
         Asistencia::create([
             'alumno_id' => $alumno->id,
             'estado' => $estado,
-            'fecha' => now(),
+            'fecha' => $fecha_actual, // Usar la fecha actual
         ]);
 
         return redirect()->back()->with('success', 'Asistencia registrada para ' . $alumno->nombres);
     }
+
+
 
     /**
      * Display the specified resource.

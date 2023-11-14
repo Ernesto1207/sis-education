@@ -22,11 +22,6 @@ class AlumnoController extends Controller
 
         $query = $request->input('search');
 
-        // Busca el alumno en la tabla de alumnos
-        // $alumnos = Alumno::where('dni', 'like', "%$query%")
-        //     ->orWhere('nombres', 'like', "%$query%")
-        //     ->first();
-
         $alumnos = Alumno::with('user')
             ->where('dni', 'like', "%$query%")
             ->orWhere('nombres', 'like', "%$query%")

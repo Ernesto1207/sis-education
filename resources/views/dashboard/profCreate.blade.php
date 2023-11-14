@@ -7,97 +7,166 @@ $fechaMaxima = date('Y-m-d', strtotime('-18 years'));
             class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md">
             @csrf
 
-            <p class="text-gray-800 dark:text-gray-300">ID: {{ $user->id }}</p>
-            <input type="hidden" name="user_id" value="{{ $user->id }}">
-            <p class="text-gray-800 dark:text-gray-300">Nombre: {{ $user->name }}</p>
-            <p class="text-gray-800 dark:text-gray-300">Correo Electrónico: {{ $user->email }}</p>
+            <div class="shadow-md text-white rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2">
+                <div class="-mx-3 md:flex mb-2">
 
-            <!-- DNI -->
-            <div class="mb-4">
-                <label for="dni" class="block text-gray-700 dark:text-gray-300">DNI:</label>
-                <input type="text" id="dni" name="dni" class="form-input" value="{{ old('dni') }}"
-                    required>
+                    <input type="hidden" name="user_id" value="{{ $user->id }}"
+                        class="appearance-none block w-full border rounded py-3 px-4 mb-3">
+
+                    <div class="md:w-1/2 px-3">
+                        <label class="block uppercase tracking-wide  text-xs font-bold mb-2" for="grid-state">
+                            Nombre
+                            de
+                            Usuario:
+                        </label>
+                        <p
+                            class="text-gray-800 dark:text-gray-300 appearance-none block w-full border rounded py-3 px-4 mb-3">
+                            {{ $user->name }}</p>
+
+                    </div>
+                    <div class="md:w-1/2 px-3">
+                        <label class="block uppercase tracking-wide  text-xs font-bold mb-2" for="grid-state">
+                            Correo
+                            Electrónico:
+                        </label>
+                        <p
+                            class="text-gray-800 dark:text-gray-300 appearance-none block w-full border rounded py-3 px-4 mb-3">
+                            {{ $user->email }}</p>
+                    </div>
+                </div>
             </div>
 
-            <!-- Nombres -->
-            <div class="mb-4">
-                <label for="nombres" class="block text-gray-700 dark:text-gray-300">Nombres:</label>
-                <input type="text" id="nombres" name="nombres" class="form-input" value="{{ old('nombres') }}"
-                    required>
-            </div>
+            <div class="shadow-md rounded px-8 text-white pt-6 pb-8 mb-4 flex flex-col my-2">
+                <div class="-mx-3 md:flex mb-6">
+                    <!-- DNI -->
+                    <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+                        <label class="block uppercase tracking-wide  text-xs font-bold mb-2" for="grid-first-name">
+                            DNI
+                        </label>
+                        <input class="appearance-none block w-full  bg-transparent border rounded py-3 px-4 mb-3"
+                            type="text" placeholder="Jane" id="dni" name="dni" required>
+                    </div>
+                    <!-- Nombres -->
+                    <div class="md:w-1/2 px-3">
+                        <label class="block uppercase tracking-wide   text-xs font-bold mb-2" for="grid-last-name">
+                            Nombres
+                        </label>
+                        <input class="appearance-none block w-full bg-transparent border rounded py-3 px-4"
+                            id="nombres" name="nombres" type="text" placeholder="Doe" required>
+                    </div>
+                </div>
 
-            <!-- Apellido Paterno -->
-            <div class="mb-4">
-                <label for="apellido_paterno" class="block text-gray-700 dark:text-gray-300">Apellido Paterno:</label>
-                <input type="text" id="apellido_paterno" name="apellido_paterno" class="form-input"
-                    value="{{ old('apellido_paterno') }}" required>
-            </div>
+                <div class="-mx-3 md:flex mb-6">
+                    <!-- Apellido Paterno -->
+                    <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+                        <label class="block uppercase tracking-wide  text-xs font-bold mb-2" for="grid-first-name">
+                            Apellido Paterno
+                        </label>
+                        <input class="appearance-none block w-full bg-transparent border rounded py-3 px-4 mb-3"
+                            id="apellido_paterno" name="apellido_paterno" type="text" placeholder="Jane" required>
+                    </div>
 
-            <!-- Apellido Materno -->
-            <div class="mb-4">
-                <label for="apellido_materno" class="block text-gray-700 dark:text-gray-300">Apellido Materno:</label>
-                <input type="text" id="apellido_materno" name="apellido_materno" class="form-input"
-                    value="{{ old('apellido_materno') }}">
-            </div>
+                    <!-- Apellido Materno -->
+                    <div class="md:w-1/2 px-3">
+                        <label class="block uppercase tracking-wide  text-xs font-bold mb-2" for="grid-last-name">
+                            Apellido Materno
+                        </label>
+                        <input class="appearance-none block w-full bg-transparent border rounded py-3 px-4"
+                            id="apellido_materno" name="apellido_materno" type="text" placeholder="Doe">
+                    </div>
 
-            <!-- Género -->
-            <div class="mb-4">
-                <label for="genero" class="block text-gray-700 dark:text-gray-300">Género:</label>
-                <select id="genero" name="genero" class="form-select" required>
-                    <option value="Masculino">Masculino</option>
-                    <option value="Femenino">Femenino</option>
-                    <option value="Femenino">38 tipos de gays</option>
-                </select>
-            </div>
+                </div>
 
-            <!-- email -->
-            <div class="mb-4">
-                <label for="email" class="block text-gray-700 dark:text-gray-300">Email:</label>
-                <input type="email" id="email" name="email" class="form-input" value="{{ old('email') }}"
-                    required>
-            </div>
+                <div class="-mx-3 md:flex mb-2">
 
-            <!-- telefono -->
-            <div class="mb-4">
-                <label for="telefono" class="block text-gray-700 dark:text-gray-300">Telefono:</label>
-                <input type="number" id="telefono" name="telefono" class="form-input" required>
-            </div>
+                    <!-- Fecha de Nacimiento -->
+                    <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+                        <label class="block uppercase tracking-wide  text-xs font-bold mb-2" for="grid-city">
+                            Fecha de Nacimiento
+                        </label>
+                        <input class="appearance-none block w-full bg-transparent border rounded py-3 px-4"
+                            id="grid-city" type="date" id="fecha_nacimiento" name="fecha_nacimiento"
+                            max="<?php echo $fechaMaxima; ?>" required>
+                    </div>
 
-            <!-- Fecha de Nacimiento -->
-            <div class="mb-4">
-                <label for="fecha_nacimiento" class="block text-gray-700 dark:text-gray-300">Fecha de
-                    Nacimiento:</label>
-                <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" max="<?php echo $fechaMaxima; ?>"
-                    class="form-input" value="{{ old('fecha_nacimiento') }}" required>
-            </div>
+                    <!-- Género -->
+                    <div class="md:w-1/2 px-3">
+                        <label class="block uppercase tracking-wide  text-xs font-bold mb-2" for="grid-state">
+                            Género
+                        </label>
+                        <div class="relative">
+                            <select class="block appearance-none w-full bg-transparent border  py-3 px-4 pr-8 rounded"
+                                id="genero" name="genero" required>
+                                <option class="bg-gray-900"value="Masculino">Masculino</option>
+                                <option class="bg-gray-900" value="Femenino">Femenino</option>
+                            </select>
+                        </div>
+                    </div>
 
-            <!-- Ciudad -->
-            <div class="mb-4">
-                <label for="ciudad" class="block text-gray-700 dark:text-gray-300">Ciudad:</label>
-                <input type="text" id="ciudad" name="ciudad" class="form-input" value="{{ old('ciudad') }}"
-                    required>
-            </div>
+                    <!-- Ciudad -->
+                    <div class="md:w-1/2 px-3">
+                        <label class="block uppercase tracking-wide  text-xs font-bold mb-2" for="grid-zip">
+                            Ciudad
+                        </label>
+                        <input class="appearance-none block w-full  bg-transparent  border  rounded py-3 px-4"
+                            id="grid-zip" type="text" id="ciudad" name="ciudad" required>
+                    </div>
 
-            <!-- Dirección -->
-            <div class="mb-4">
-                <label for="direccion" class="block text-gray-700 dark:text-gray-300">Dirección:</label>
-                <input type="text" id="direccion" name="direccion" class="form-input" value="{{ old('direccion') }}"
-                    required>
-            </div>
+                </div>
 
-            <!-- Estado -->
-            <div class="mb-4">
-                <label for="estado" class="block text-gray-700 dark:text-gray-300">Estado:</label>
-                <select id="estado" name="estado" class="form-select" required>
-                    <option value="Activo">Activo</option>
-                    <option value="Inactivo">Inactivo</option>
-                </select>
-            </div>
+                <div class="-mx-3 md:flex mb-6">
+                    <!-- email -->
+                    <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+                        <label class="block uppercase tracking-wide  text-xs font-bold mb-2" for="email">
+                            Correo Electronico
+                        </label>
+                        <input class="appearance-none block w-full  bg-transparent border rounded py-3 px-4 mb-3"
+                            name="email" id="email" value="{{ $user->email }}" placeholder="Prueba@gmail.com"
+                            required>
+                    </div>
+                    <!-- Telefono -->
+                    <div class="md:w-1/2 px-3">
+                        <label class="block uppercase tracking-wide   text-xs font-bold mb-2" for="grid-last-name">
+                            Telefono
+                        </label>
+                        <input class="appearance-none block w-full bg-transparent border rounded py-3 px-4"
+                            id="telefono" name="telefono" type="number" placeholder="963258741" required>
+                    </div>
+                </div>
 
-            <div class="mb-4">
-                <button type="submit"
-                    class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-700">Guardar
-                    Alumno</button>
+                <div class="-mx-3 md:flex mb-2">
+                    <!-- Dirección -->
+                    <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+                        <label class="block uppercase tracking-wide  text-xs font-bold mb-2" for="grid-city">
+                            Dirección
+                        </label>
+                        <input class="appearance-none block w-full bg-transparent border rounded py-3 px-4"
+                            type="text" id="direccion" name="direccion" required>
+                    </div>
+
+                    <!-- Estado -->
+                    <div class="md:w-1/2 px-3">
+                        <label class="block uppercase tracking-wide  text-xs font-bold mb-2" for="grid-state">
+                            Estado
+                        </label>
+                        <div class="relative">
+                            <select class="block appearance-none w-full bg-transparent border  py-3 px-4 pr-8 rounded"
+                                id="estado" name="estado" required>
+                                <option class="bg-gray-900" value="Activo">Activo</option>
+                                <option class="bg-gray-900" value="Inactivo">Inactivo</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="-mx-3 md:flex items-center justify-center mb-2">
+                    <div class=" px-3 py-10">
+                        <button type="submit"
+                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Guardar
+                            Profesor
+                        </button>
+                    </div>
+                </div>
             </div>
         </form>
     </div>
