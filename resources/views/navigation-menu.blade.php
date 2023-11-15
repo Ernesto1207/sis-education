@@ -412,7 +412,7 @@
                         </a>
                     </li>
                     <!-- end::Submenu link -->
-                    
+
                     <!-- start::Submenu link -->
                     <li
                         class="pl-10 pr-6 py-2 cursor-pointer hover:bg-black hover:bg-opacity-30 transition duration-200 hover:text-gray-100">
@@ -474,7 +474,8 @@
 
         <!-- start::Menu link asistencias -->
         @if (auth()->user()->can('administrador') ||
-                auth()->user()->can('profesor'))
+                auth()->user()->can('profesor') ||
+                auth()->user()->can('alumno'))
             <div x-data="{ linkHover: false, linkActive: false }">
                 <div @mouseover="linkHover = true" @mouseleave="linkHover = false"
                     @click="linkActive = !linkActive"
@@ -495,13 +496,17 @@
                 <!-- start::Submenu -->
                 <ul x-show="linkActive" x-cloak x-collapse.duration.300ms class="text-gray-400">
                     <!-- start::Submenu link -->
-                    <li
-                        class="pl-10 pr-6 py-2 cursor-pointer hover:bg-black hover:bg-opacity-30 transition duration-200 hover:text-gray-100">
-                        <a href="{{ route('asistencia.create') }}" class="flex items-center">
-                            <span class="mr-2 text-sm">&bull;</span>
-                            <span class="overflow-ellipsis">Registrar Asistencias</span>
-                        </a>
-                    </li>
+                    @if (auth()->user()->can('administrador') ||
+                            auth()->user()->can('profesor'))
+                        <li
+                            class="pl-10 pr-6 py-2 cursor-pointer hover:bg-black hover:bg-opacity-30 transition duration-200 hover:text-gray-100">
+                            <a href="{{ route('asistencia.create') }}" class="flex items-center">
+                                <span class="mr-2 text-sm">&bull;</span>
+                                <span class="overflow-ellipsis">Registrar Asistencias</span>
+                            </a>
+                        </li>
+                    @endcan
+
                     <!-- end::Submenu link -->
 
                     <!-- start::Submenu link -->
@@ -513,7 +518,6 @@
                         </a>
                     </li>
                     <!-- end::Submenu link -->
-
                 </ul>
                 <!-- end::Submenu -->
             </div>
@@ -522,7 +526,8 @@
 
         <!-- start::Menu link Partes -->
         @if (auth()->user()->can('administrador') ||
-                auth()->user()->can('profesor'))
+                auth()->user()->can('profesor') ||
+                Auth::user()->can('alumno'))
             <div x-data="{ linkHover: false, linkActive: false }">
                 <div @mouseover="linkHover = true" @mouseleave="linkHover = false"
                     @click="linkActive = !linkActive"
@@ -560,7 +565,8 @@
 
         <!-- start::Menu link Justificaciones -->
         @if (auth()->user()->can('administrador') ||
-                auth()->user()->can('profesor'))
+                auth()->user()->can('profesor') ||
+                Auth::user()->can('alumno'))
             <div x-data="{ linkHover: false, linkActive: false }">
                 <div @mouseover="linkHover = true" @mouseleave="linkHover = false"
                     @click="linkActive = !linkActive"
@@ -596,24 +602,5 @@
             </div>
         @endcan
         <!-- end::Menu link -->
-
-        <!-- start::Menu link -->
-        <a x-data="{ linkHover: false }" @mouseover="linkHover = true"
-            @mouseleave="linkHover = false" href="./../messages.html"
-            class="flex items-center text-gray-400 px-6 py-3 cursor-pointer hover:bg-black hover:bg-opacity-30 transition duration-200">
-            <svg xmlns="http://www.w3.org/2000/svg"
-                class="w-5 h-5 transition duration-200"
-                :class="linkHover ? 'text-gray-100' : ''" fill="none"
-                viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-            </svg>
-            <span class="ml-3 transition duration-200"
-                :class="linkHover ? 'text-gray-100' : ''">
-                Messages
-            </span>
-        </a>
-        <!-- end::Menu link -->
-        {{-- <p class="text-xs text-gray-600 mt-10 mb-2 px-6 uppercase">Components</p> --}}
-</nav>
+    </nav>
 </aside>
