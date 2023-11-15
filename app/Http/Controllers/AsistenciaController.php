@@ -14,24 +14,26 @@ class AsistenciaController extends Controller
      */
     public function index(Request $request)
     {
-        $asistencias = Asistencia::all();
         // return view('dashboard.asistencia', compact('asistencias'));
         $query = $request->input('search');
 
         // Busca el alumno en la tabla de alumnos
         $alumno = Alumno::where('dni', 'like', "%$query%")
             ->orWhere('nombres', 'like', "%$query%")
-            ->first();
+            ->get();
 
-        if ($alumno) {
-            // Si se encuentra el alumno, busca en la tabla de asistencias utilizando el id_alumno
-            $asistencias = Asistencia::where('alumno_id', $alumno->id)
+        if ($alumno->isNotEmpty()) {
+
+            $alumnoIds = $alumno->pluck('id')->toArray();
+            // Si se encuentra el alumno, busca en la tabla de asistencias utilizando el alumno_id
+            $asistencias = Asistencia::whereIn('alumno_id', $alumnoIds)
                 ->get();
 
             return view('dashboard.asistencia', compact('asistencias'));
         }
-
-        return view('dashboard.asistencia', compact('asistencias', 'alumno'));
+        // Si no se encuentra ningún alumno, muestra todas las asistencias
+        $asistencias = Asistencia::all();
+        return view('dashboard.asistencia', compact('asistencias'));
     }
 
     /**
@@ -99,39 +101,6 @@ class AsistenciaController extends Controller
         return redirect()->back()->with('success', 'Asistencia registrada para ' . $alumno->nombres);
     }
 
-
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 
     // public function buscar(Request $request)
     // {

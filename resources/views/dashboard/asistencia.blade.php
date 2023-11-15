@@ -12,7 +12,7 @@
                 <div class="w-1/2">
                     <input type="text"
                         class="w-full border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring focus:ring-indigo-200 dark:text-zinc-950"
-                        id="search" name="search" placeholder="DNI o Nombre" required>
+                        id="search" name="search" placeholder="DNI o Nombre">
                 </div>
                 <button type="submit"
                     class="bg-indigo-500 text-white py-2 px-4 rounded-md hover:bg-indigo-600 focus:outline-none focus:ring focus:ring-indigo-200">
@@ -69,7 +69,7 @@
                         <td class="px-6 py-4">
                             {{ $asistencia->estado }}
                         </td>
-
+                        {{-- <p class="text-white"> {{$asistencia}} </p> --}}
                     </tr>
                 @endforeach
             </tbody>
