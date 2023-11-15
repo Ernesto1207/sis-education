@@ -121,5 +121,6 @@ class PerfilController extends Controller
 
             ));
         }
+        return view('profile.mostrar', compact('alumnos','profesor'));
     }
 }

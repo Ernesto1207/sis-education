@@ -1,9 +1,9 @@
 <x-app-layout>
-    {{-- <x-slot name="header">
+    <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('Perfil') }}
         </h2>
-    </x-slot> --}}
+    </x-slot>
     <div class="h-full bg-gray-200 p-8">
         <div class="bg-white rounded-lg shadow-xl pb-8">
 
@@ -22,6 +22,8 @@
                         @if ($profesor)
                             {{ ucfirst($profesor->nombres) }}
                             {{ ucfirst($profesor->apellido_paterno) }}
+                        @else
+                        {{Auth::user()->name}}
                         @endif
                     </p>
                     <span class="bg-blue-500 rounded-full p-1" title="Verified">
