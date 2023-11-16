@@ -80,7 +80,7 @@ class NotaController extends Controller
         $nota->save();
 
         // dd($request->all());
-        return view('dashboard.nota')->with('success', 'Nota registrada exitosamente.');
+        return redirect()->route('Notas.index')->with('success', 'Nota registrada exitosamente.');
     }
 
     public function validarDNI(Request $request)
