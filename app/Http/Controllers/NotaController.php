@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\alumno;
+use App\Models\AsignacionesCurso;
 use App\Models\Curso;
 use App\Models\Nota;
 
@@ -48,14 +49,28 @@ class NotaController extends Controller
         if (!$alumno) {
             return redirect()->back()->with('error', 'El alumno no existe');
         }
+
         // Obtiene el ID del curso a partir de la solicitud
         $cursoId = $request->curso_id;
 
-        // Verifica si el curso ya tiene 4 notas
-        $notasCurso = Nota::where('curso_id', $cursoId)->count();
-        if ($notasCurso >= 4) {
-            return redirect()->back()->with('error', 'Este curso ya tiene 4 notas.');
+        // Verifica si el alumno está asignado al curso
+        $asignacionCurso = AsignacionesCurso::where('alumno_id', $alumno->id)
+            ->where('curso_id', $cursoId)
+            ->first();
+
+        if (!$asignacionCurso) {
+            return redirect()->back()->with('error', 'El alumno no está asignado a este curso.');
         }
+
+        // Verifica si el alumno ya tiene 4 notas en este curso
+        $notasCurso = $alumno->notas()->where('curso_id', $cursoId)->count();
+
+        if ($notasCurso >= 4) {
+            return redirect()->back()->with('error', 'Este alumno ya tiene 4 notas en este curso.');
+        } 
+        // else {
+        //     return redirect()->back()->with('success', 'Nota registrada exitosamente.');
+        // }
 
         // Crea una nueva instancia de Nota
         $nota = new Nota();
@@ -65,7 +80,7 @@ class NotaController extends Controller
         $nota->save();
 
         // dd($request->all());
-        return view('dashboard.nota');
+        return view('dashboard.nota')->with('success', 'Nota registrada exitosamente.');
     }
 
     public function validarDNI(Request $request)
@@ -87,7 +102,7 @@ class NotaController extends Controller
         // $cursos = Curso::all();
         $cursosDelAlumno = $alumno->cursos;
 
-        return view('dashboard.asignar-notas', compact('dni', 'nombre', 'apellidoP' , 'apellidoM' ,'cursosDelAlumno'));
+        return view('dashboard.asignar-notas', compact('dni', 'nombre', 'apellidoP', 'apellidoM', 'cursosDelAlumno'));
     }
 
 
