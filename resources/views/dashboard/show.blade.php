@@ -4,15 +4,19 @@
             {{ __('Datos del Alumno') }}
         </h2>
     </x-slot>
+
     <div class="text-white rounded-lg p-6 shadow-md">
+        <x-section-border />
         <a href="{{ route('asignar-curso', ['id' => $alumno->id]) }}"
             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue active:bg-blue-800">Asignar
             Curso</a>
-        <div class="flex flex-row gap-10 my-3">
-            <p>nombre: {{ ucfirst($alumno->nombres) }}</p>
+            <x-section-border />
+        <div class="flex flex-row justify-center gap-10 my-3 py-2">
+            <p>Nombre: {{ ucfirst($alumno->nombres) }}</p>
             <p>Apellido Paterno: {{ ucfirst($alumno->apellido_paterno) }}</p>
             <p>Apellido Materno: {{ ucfirst($alumno->apellido_materno) }}</p>
         </div>
+        <x-section-border />
 
         @if ($cursos->count() > 0)
             <div class="flex-1 rounded-lg shadow-xl mt-4 p-8">
@@ -124,7 +128,8 @@
         @else
             <p class="italic mt-2">El alumno no está inscrito en ningún curso.</p>
         @endif
-
+        
+        <x-section-border />
 
         <!-- Mostrar notas del alumno -->
         <h3 class="text-xl font-semibold mt-6 mb-2">Notas del Alumno</h3>
@@ -141,7 +146,6 @@
                                 <th scope="col" class="px-6 py-3">
                                     Notas
                                 </th>
-
                             </tr>
                         </thead>
                         <tbody>
@@ -160,6 +164,7 @@
                                         {{ ucfirst($notasPorCurso[0]->curso->nombre) }}</th>
                                     <td class="px-6 py-4">{{ $nota->valor }}</td>
                                 </tr>
+                                
                             @endforeach
                             @if ($contadorNotas > 0)
                                 <tr class="text-white box-content bg-white border-b dark:bg-gray-800 dark:border-gray-700">

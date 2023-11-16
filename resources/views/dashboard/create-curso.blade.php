@@ -20,56 +20,64 @@
         @endif
 
         <form method="POST" action="{{ route('cursos.store') }}"
-            class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            class="bg-transparent text-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
             @csrf
 
             <div class="mb-4">
-                <label for="nombre" class="block text-gray-700 text-sm font-bold mb-2">Nombre del Curso</label>
+                <label for="nombre" class="block  text-sm font-bold mb-2">Nombre del Curso</label>
                 <input type="text"
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    class="shadow appearance-none border rounded w-full py-2 px-3 bg-transparent leading-tight focus:outline-none focus:shadow-outline"
                     id="nombre" name="nombre" placeholder="Nombre del Curso" required>
             </div>
 
             <div class="mb-4">
-                <label for="descripcion" class="block text-gray-700 text-sm font-bold mb-2">Descripción del
+                <label for="descripcion" class="block  text-sm font-bold mb-2">Descripción del
                     Curso</label>
                 <textarea
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    class="shadow appearance-none border rounded w-full py-2 px-3 bg-transparent leading-tight focus:outline-none focus:shadow-outline"
                     id="descripcion" name="descripcion" placeholder="Descripción del Curso" rows="4" required></textarea>
             </div>
 
             <div class="mb-4">
-                <label for="profesor_id" class="block text-gray-700 text-sm font-bold mb-2">Profesor</label>
+                <label for="profesor_id" class="block  text-sm font-bold mb-2">Profesor</label>
                 <select
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    class="shadow appearance-none border rounded w-full py-2 px-3 bg-transparent leading-tight focus:outline-none focus:shadow-outline"
                     id="profesor_id" name="profesor_id" required>
-                    <option value="" disabled selected>Seleccione un profesor</option>
+                    <option value="" class="bg-gray-900" disabled selected>Seleccione un profesor</option>
                     @foreach ($profesores as $profesor)
-                        <option value="{{ $profesor->id }}">{{ $profesor->nombres }} {{ $profesor->apellido_paterno }}
+                        <option class="bg-gray-700" value="{{ $profesor->id }}">{{ $profesor->nombres }}
+                            {{ $profesor->apellido_paterno }}
                             {{ $profesor->apellido_materno }}</option>
                     @endforeach
                 </select>
             </div>
             <div class="mb-4">
-                <label for="dias_semana" class="block text-gray-700 text-sm font-bold mb-2">Días de la Semana:</label>
-                <input type="text" id="dias_semana" name="dias_semana"
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    placeholder="Lunes, Miércoles, Viernes" required>
+                <label for="dias_semana" class="block  text-sm font-bold mb-2">Días de la Semana:</label>
+                <select
+                    class="shadow appearance-none border rounded w-full py-2 px-3 bg-transparent leading-tight focus:outline-none focus:shadow-outline"
+                    id="dias_semana" name="dias_semana" required>
+                    <option value="" class="bg-gray-900" disabled selected>Seleccione un Dia</option>
+                    <option class="bg-gray-700" value="lunes">Lunes</option>
+                    <option class="bg-gray-700" value="martes">Martes</option>
+                    <option class="bg-gray-700" value="miercoles">Miercoles</option>
+                    <option class="bg-gray-700" value="jueves">Jueves</option>
+                    <option class="bg-gray-700" value="viernes">Viernes</option>
+                </select>
             </div>
 
             <div class="mb-4">
-                <label for="horario_entrada" class="block text-gray-700 text-sm font-bold mb-2">Horario de
+                <label for="horario_entrada" class="block  text-sm font-bold mb-2">Horario de
                     Entrada:</label>
                 <input type="time" id="horario_entrada" name="horario_entrada"
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    class="shadow appearance-none border rounded w-full py-2 px-3 bg-transparent leading-tight focus:outline-none focus:shadow-outline"
                     required>
             </div>
 
             <div class="mb-4">
-                <label for="horario_salida" class="block text-gray-700 text-sm font-bold mb-2">Horario de
+                <label for="horario_salida" class="block  text-sm font-bold mb-2">Horario de
                     Salida:</label>
                 <input type="time" id="horario_salida" name="horario_salida"
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    class="shadow appearance-none border rounded w-full py-2 px-3 bg-transparent leading-tight focus:outline-none focus:shadow-outline"
                     required>
             </div>
 

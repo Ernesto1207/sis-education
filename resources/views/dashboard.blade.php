@@ -287,8 +287,9 @@
                 </div>
             </div>
         </div>
-
     @endcan
+    
+    <x-section-border />
 
     @if (auth()->user()->can('profesor') || Auth::user()->can('alumno'))
 
