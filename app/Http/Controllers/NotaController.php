@@ -68,10 +68,7 @@ class NotaController extends Controller
         if ($notasCurso >= 4) {
             return redirect()->back()->with('error', 'Este alumno ya tiene 4 notas en este curso.');
         } 
-        // else {
-        //     return redirect()->back()->with('success', 'Nota registrada exitosamente.');
-        // }
-
+        
         // Crea una nueva instancia de Nota
         $nota = new Nota();
         $nota->alumno_id = $alumno->id;
