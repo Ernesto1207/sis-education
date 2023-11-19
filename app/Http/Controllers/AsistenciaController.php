@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Asistencia;
 use App\Models\alumno;
-
+use Illuminate\Support\Facades\Auth;
 
 class AsistenciaController extends Controller
 {
@@ -14,27 +14,47 @@ class AsistenciaController extends Controller
      */
     public function index(Request $request)
     {
-        // return view('dashboard.asistencia', compact('asistencias'));
+        $usuario = Auth::user();
+        $alumnos = $usuario->alumno;
+
+
         $query = $request->input('search');
-
-        // Busca el alumno en la tabla de alumnos
-        $alumno = Alumno::where('dni', 'like', "%$query%")
-            ->orWhere('nombres', 'like', "%$query%")
-            ->get();
-
-        if ($alumno->isNotEmpty()) {
-
-            $alumnoIds = $alumno->pluck('id')->toArray();
-            // Si se encuentra el alumno, busca en la tabla de asistencias utilizando el alumno_id
-            $asistencias = Asistencia::whereIn('alumno_id', $alumnoIds)
+        $mensaje = "";
+        //uso de input search
+        if ($query) {
+            // Si se proporciona una consulta de búsqueda
+            $alumno = Alumno::where('dni', 'like', "%$query%")
+                ->orWhere('nombres', 'like', "%$query%")
                 ->get();
 
+            if ($alumno->isNotEmpty()) {
+                $alumnoIds = $alumno->pluck('id')->toArray();
+                // Si se encuentra el alumno, busca en la tabla de asistencias utilizando el alumno_id
+                $asistencias = Asistencia::whereIn('alumno_id', $alumnoIds)
+                    ->get();
+            } else {
+                // Si no se encuentra ningún alumno, muestra un mensaje
+                $mensaje = "No se encontró ningún alumno con ese criterio de búsqueda.";
+            }
+        } else {
+            // Si no se proporciona una consulta de búsqueda, muestra todas las asistencias
+            $asistencias = Asistencia::all();
+        }
+
+
+        // Verifica si el usuario tiene un rol de alumno
+        if ($alumnos) {
+            $alumnoId = $usuario->alumno->id;
+            $asistencias = Asistencia::where('alumno_id', $alumnoId)->get();
+            // return ($asistencias);
             return view('dashboard.asistencia', compact('asistencias'));
         }
-        // Si no se encuentra ningún alumno, muestra todas las asistencias
+
+        // Si el usuario no es un alumno, muestra todas las asistencias
         $asistencias = Asistencia::all();
         return view('dashboard.asistencia', compact('asistencias'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -100,28 +120,4 @@ class AsistenciaController extends Controller
 
         return redirect()->back()->with('success', 'Asistencia registrada para ' . $alumno->nombres);
     }
-
-
-    // public function buscar(Request $request)
-    // {
-    //     $query = $request->input('search');
-
-    //     // Busca el alumno en la tabla de alumnos
-    //     $alumno = Alumno::where('dni', 'like', "%$query%")
-    //         ->orWhere('nombres', 'like', "%$query%")
-    //         ->first();
-
-    //     if ($alumno) {
-    //         // Si se encuentra el alumno, busca en la tabla de asistencias utilizando el id_alumno
-    //         $asistencia = Asistencia::where('alumno_id', $alumno->id)
-    //             ->get();
-
-    //         return view('dashboard.asistencia', compact('asistencia'));
-    //     } else {
-    //         // Si no se encuentra el alumno, puedes manejar el caso en consecuencia (por ejemplo, mostrar un mensaje de que no se encontraron resultados).
-    //         return view('dashboard.asistencia', compact('asistencia'));
-    //     }
-
-    //     // return view('dashboard.asistencia', compact('asistencia'));
-    // }
 }

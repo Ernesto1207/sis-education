@@ -49,29 +49,36 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($asistencias as $asistencia)
+                @if (isset($mensaje))
                     <tr
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <th scope="row"
-                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            {{ $asistencia->alumno->dni }}
-                        </th>
-                        <td class="px-6 py-4">
-                            {{ $asistencia->alumno->nombres }}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{ $asistencia->alumno->apellido_paterno }}
-                        </td>
-
-                        <td class="px-6 py-4">
-                            {{ $asistencia->alumno->apellido_materno }}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{ $asistencia->estado }}
-                        </td>
-                        {{-- <p class="text-white"> {{$asistencia}} </p> --}}
+                        <p class="text-white">{{ $mensaje }}</p>
                     </tr>
-                @endforeach
+                @else
+                    @foreach ($asistencias as $asistencia)
+                        <tr
+                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <th scope="row"
+                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                {{ $asistencia->alumno->dni }}
+                            </th>
+                            <td class="px-6 py-4">
+                                {{ $asistencia->alumno->nombres }}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ $asistencia->alumno->apellido_paterno }}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ $asistencia->alumno->apellido_materno }}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ $asistencia->estado }}
+                            </td>
+                            {{-- <p class="text-white"> {{$asistencia}} </p> --}}
+                        </tr>
+                    @endforeach
+                @endif
+
             </tbody>
         </table>
     </div>
