@@ -19,7 +19,7 @@ class DashboardController extends Controller
     public function index()
     {
         //
-        $alumnos = alumno::count();
+        $alumno = alumno::count();
         $profesores = profesores::count();
         $cursos = Curso::count();
 
@@ -151,6 +151,6 @@ class DashboardController extends Controller
         }
 
 
-        return view('dashboard', compact('alumnos', 'profesores', 'cursos', 'datos', 'asistenciasCount'));
+        return view('dashboard', compact('alumnos','alumno', 'profesores', 'cursos', 'datos', 'asistenciasCount'));
     }
 }

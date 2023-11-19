@@ -46,11 +46,10 @@ class usuariosController extends Controller
         ]);
         if ($user) {
             if ($request->input('tipo_usuario') === 'Alumno') {
-                return view('dashboard.alumCreate',['user' => $user]);
-                
+                return view('dashboard.alumCreate', ['user' => $user]);
             } elseif ($request->input('tipo_usuario') === 'Profesor') {
 
-                return view('dashboard.profCreate',['user' => $user]);
+                return view('dashboard.profCreate', ['user' => $user]);
             }
 
             return redirect()->route('usuarios.index')->with('success', 'Usuario creado exitosamente.');

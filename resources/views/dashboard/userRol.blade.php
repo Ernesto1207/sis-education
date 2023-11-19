@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800  dark:text-gray-200 leading-tight shadow-md rounded-lg">
-            {{ __('Usuarios y Roles') }} 
+            {{ __('Usuarios y Roles') }}
             {{-- <span class="uppercase">{{ $role->name }}</span> --}}
         </h2>
     </x-slot>
@@ -17,7 +17,7 @@
         @foreach ($roles as $role)
             <div>
                 <label class="text-white">
-                    {!! Form::checkbox(' roles[]', $role->id, $user->hasAnyRole($role->id) ? : false, [
+                    {!! Form::checkbox(' roles[]', $role->id, $user->hasAnyRole($role->id) ?: false, [
                         'class' =>
                             'appearance-none w-9 focus:outline-none checked:bg-blue-300 h-5 bg-gray-300 rounded-full before:inline-block before:rounded-full before:bg-blue-500 before:h-4 before:w-4 checked:before:translate-x-full shadow-inner transition-all duration-300 before:ml-0.5',
                     ]) !!}
@@ -31,4 +31,7 @@
         ]) !!}
         {!! Form::close() !!}
     </div>
+    <x-section-border />
+
+    
 </x-app-layout>

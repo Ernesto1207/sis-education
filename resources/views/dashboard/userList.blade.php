@@ -205,7 +205,6 @@
 <div class="pagination">
     {{ $users->links() }}
 </div>
-
 <x-section-border />
 
 </x-app-layout>

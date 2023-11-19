@@ -14,9 +14,7 @@ class AsignarController extends Controller
     public function index()
     {
         //
-        // $users = User::all();
         $users = User::oldest()->paginate(10);
-
         return view('dashboard.userList', compact('users'));
     }
 

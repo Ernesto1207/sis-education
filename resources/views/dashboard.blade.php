@@ -26,7 +26,7 @@
                     </div>
                     <div class="h-50 ml-4 flex w-auto flex-col justify-center">
                         <p class="font-dm text-sm font-medium text-gray-600">Alumnos</p>
-                        <h4 class="text-xl font-bold text-navy-700 dark:text-white"> {{ $alumnos }} </h4>
+                        <h4 class="text-xl font-bold text-navy-700 dark:text-white"> {{ $alumno }} </h4>
                     </div>
                 </div>
 

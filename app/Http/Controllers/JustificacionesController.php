@@ -22,14 +22,14 @@ class JustificacionesController extends Controller
 
 
         $usuario = Auth::user();
-        $alumnos = $usuario->alumno;
+        $alumno = $usuario->alumno;
 
-        if ($alumnos) {
+        if ($alumno) {
             $alumnoId = $usuario->alumno->id;
             $justificaciones = Justificaciones::where('alumno_id', $alumnoId)->get();
             $profesores = profesores::all();
             // return ($asistencias);
-            return view('dashboard.justificaciones', compact('justificaciones', 'alumnos', 'profesores'));
+            return view('dashboard.justificaciones', compact('justificaciones', 'alumno', 'profesores'));
         }
 
         $query = $request->input('search');
@@ -51,6 +51,7 @@ class JustificacionesController extends Controller
         } else {
             $justificaciones = Justificaciones::all();
         }
+
         return view('dashboard.justificaciones', compact('justificaciones', 'alumnos', 'profesores'));
     }
 
