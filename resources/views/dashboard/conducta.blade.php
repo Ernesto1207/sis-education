@@ -64,9 +64,9 @@
                                 <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Nombre del
                                     Usuario</label>
                                 <select name="alumno_id" id="alumno_id" class="form-select " required>
-                                    @foreach ($alumnos as $alumno)
-                                        <option value="{{ $alumno->id }}">{{ $alumno->nombres }}
-                                            {{ $alumno->apellido_paterno }} {{ $alumno->apellido_materno }} </option>
+                                    @foreach ($alumno as $alumnos)
+                                        <option value="{{ $alumnos->id }}">{{ $alumnos->nombres }}
+                                            {{ $alumnos->apellido_paterno }} {{ $alumnos->apellido_materno }} </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -99,6 +99,26 @@
             </div>
         </div>
     @endcan
+    <x-section-border />
+
+    <div class="container mx-auto dark:text-white">
+        <h2 class="text-2xl font-semibold mb-4">Buscar</h2>
+        <form action="{{ route('conducta.index') }}" method="GET" class="mb-4">
+            @csrf
+            <div class="flex items-center space-x-4">
+                <div class="w-1/2">
+                    <input type="text"
+                        class="w-full border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring focus:ring-indigo-200 dark:text-zinc-950"
+                        id="search" name="search" placeholder="DNI o Nombre">
+                </div>
+                <button type="submit"
+                    class="bg-indigo-500 text-white py-2 px-4 rounded-md hover:bg-indigo-600 focus:outline-none focus:ring focus:ring-indigo-200">
+                    Buscar
+                </button>
+            </div>
+        </form>
+        <h3 class="text-xl font-semibold mb-4">Resultados de la búsqueda:</h3>
+    </div>
     <x-section-border />
 
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -163,42 +183,53 @@
                         </td>
 
                         <td class="flex items-center px-6 py-4 space-x-3">
-                            @if (auth()->user()->can('editar usuarios') || auth()->user()->can('administrador'))
-                            <div x-data="{ menuOpen: false, wideInfoModal: false}">
-                                <button @click="wideInfoModal = !wideInfoModal"
-                                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline" data-conducta-id="{{ $conducta->id }}"">
-                                    Edit
-                                </button>
-                                <!-- start:: Wide Info Modal -->
-                                    <div x-show="wideInfoModal" x-transition.opacity x-transition:enter.duration.100ms
-                                    x-transition:leave.duration.300ms x-cloak
-                                    class="fixed top-0 left-0 z-50 bg-black bg-opacity-70 h-screen w-full flex items-center justify-center">
-                                    <div @click.away="wideInfoModal = false"
-                                        class="relative w-5/6 md:w-3/4 lg:w-2/3 xl:w-1/2 bg-white p-10 rounded-lg shadow-xl dark:bg-gray-700 dark:border-gray-600">
-                                        <span @click="wideInfoModal = false"
-                                            class="absolute right-2 top-1 text-xl cursor-pointer hover:text-gray-600" title="Close">
-                                            &#x2715
-                                        </span>
-                                        <div class="max-w-2xl mx-auto">
-                                            <form method="POST" action="{{ route('conducta.update', $conducta) }}" class="w-full max-w-md mx-auto">
-                                                @csrf
-                                                @method('PUT')
-                                                <input id="alumno_id" name="alumno_id" type="text" value="{{$conducta->alumno_id}}" class="hidden">
-                                                <input id="profesor_id" name="profesor_id" type="text" value="{{$conducta->profesor_id}}" class="hidden">
-                                                <label for="descripcion" class="block mb-2 text-xl font-medium text-gray-900 dark:text-gray-900">Descripcion</label>
-                                                <textarea id="descripcion" name="descripcion" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-500 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                                    {{$conducta->descripcion}}
+                            @if (auth()->user()->can('editar usuarios') ||
+                                    auth()->user()->can('administrador'))
+                                <div x-data="{ menuOpen: false, wideInfoModal: false }">
+                                    <button @click="wideInfoModal = !wideInfoModal"
+                                        class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                                        data-conducta-id="{{ $conducta->id }}"">
+                                        Edit
+                                    </button>
+                                    <!-- start:: Wide Info Modal -->
+                                    <div x-show="wideInfoModal" x-transition.opacity
+                                        x-transition:enter.duration.100ms x-transition:leave.duration.300ms x-cloak
+                                        class="fixed top-0 left-0 z-50 bg-black bg-opacity-70 h-screen w-full flex items-center justify-center">
+                                        <div @click.away="wideInfoModal = false"
+                                            class="relative w-5/6 md:w-3/4 lg:w-2/3 xl:w-1/2 bg-white p-10 rounded-lg shadow-xl dark:bg-gray-700 dark:border-gray-600">
+                                            <span @click="wideInfoModal = false"
+                                                class="absolute right-2 top-1 text-xl cursor-pointer hover:text-gray-600"
+                                                title="Close">
+                                                &#x2715
+                                            </span>
+                                            <div class="max-w-2xl mx-auto">
+                                                <form method="POST"
+                                                    action="{{ route('conducta.update', $conducta) }}"
+                                                    class="w-full max-w-md mx-auto">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <input id="alumno_id" name="alumno_id" type="text"
+                                                        value="{{ $conducta->alumno_id }}" class="hidden">
+                                                    <input id="profesor_id" name="profesor_id" type="text"
+                                                        value="{{ $conducta->profesor_id }}" class="hidden">
+                                                    <label for="descripcion"
+                                                        class="block mb-2 text-xl font-medium text-gray-900 dark:text-gray-900">Descripcion</label>
+                                                    <textarea id="descripcion" name="descripcion" rows="4"
+                                                        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-500 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                    {{ $conducta->descripcion }}
                                                 </textarea>
-                                                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Enviar</button>
-                                            </form>
+                                                    <button type="submit"
+                                                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Enviar</button>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
+                                    <!-- end:: Wide Info Modal -->
                                 </div>
-                                <!-- end:: Wide Info Modal -->
-                            </div>
-                                
+
                             @endcan
-                            @if (auth()->user()->can('eliminar usuarios') || auth()->user()->can('administrador'))
+                            @if (auth()->user()->can('eliminar usuarios') ||
+                                    auth()->user()->can('administrador'))
 
                                 <form action=" {{ route('conducta.destroy', $conducta->id) }}"method="POST"
                                     class="font-medium text-red-600 dark:text-red-500 hover:underline cursor-pointer">
@@ -208,12 +239,12 @@
                                     <button type="submit">Remove</button>
                                 </form>
                             @endcan
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
+                </td>
+            </tr>
+        @endforeach
+    </tbody>
+</table>
+</div>
 
 <script>
     $(document).ready(function() {
@@ -221,7 +252,7 @@
             var conductaId = $(this).data('conducta-id');
 
             $.ajax({
-                url: '{{ route('conducta.edit', $conducta) }}' + conductaId, 
+                url: '{{ route('conducta.edit', $conducta) }}' + conductaId,
                 type: 'GET',
                 success: function(response) {
                     $('#modal-body').html(response);
