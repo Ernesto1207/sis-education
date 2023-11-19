@@ -107,6 +107,26 @@
     @endcan
     <x-section-border />
 
+    <div class="container mx-auto dark:text-white">
+        <h2 class="text-2xl font-semibold mb-4">Buscar</h2>
+        <form action="{{ route('conducta.index') }}" method="GET" class="mb-4">
+            @csrf
+            <div class="flex items-center space-x-4">
+                <div class="w-1/2">
+                    <input type="text"
+                        class="w-full border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring focus:ring-indigo-200 dark:text-zinc-950"
+                        id="search" name="search" placeholder="DNI o Nombre">
+                </div>
+                <button type="submit"
+                    class="bg-indigo-500 text-white py-2 px-4 rounded-md hover:bg-indigo-600 focus:outline-none focus:ring focus:ring-indigo-200">
+                    Buscar
+                </button>
+            </div>
+        </form>
+        <h3 class="text-xl font-semibold mb-4">Resultados de la búsqueda:</h3>
+    </div>
+    <x-section-border />
+
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead

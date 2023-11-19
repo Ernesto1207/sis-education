@@ -3,22 +3,54 @@
 namespace App\Http\Controllers;
 
 use App\Models\alumno;
-use App\Models\Justificaciones;
 use App\Models\profesores;
 use Illuminate\Http\Request;
+use App\Models\Justificaciones;
+use Illuminate\Support\Facades\Auth;
 
 class JustificacionesController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         //
         $justificaciones = Justificaciones::all();
         $alumnos = alumno::all();
         $profesores = profesores::all();
 
+
+        $usuario = Auth::user();
+        $alumnos = $usuario->alumno;
+
+        if ($alumnos) {
+            $alumnoId = $usuario->alumno->id;
+            $justificaciones = Justificaciones::where('alumno_id', $alumnoId)->get();
+            $profesores = profesores::all();
+            // return ($asistencias);
+            return view('dashboard.justificaciones', compact('justificaciones', 'alumnos', 'profesores'));
+        }
+
+        $query = $request->input('search');
+        $mensaje = "";
+
+        if ($query) {
+            $alumno = Alumno::where('dni', 'like', "%$query%")
+                ->orWhere('nombres', 'like', "%$query%")
+                ->get();
+            if ($alumno->isNotEmpty()) {
+                $alumnoIds = $alumno->pluck('id')->toArray();
+                // Si se encuentra el alumno, busca en la tabla de asistencias utilizando el alumno_id
+                $justificaciones = Justificaciones::whereIn('alumno_id', $alumnoIds)
+                    ->get();
+            } else {
+                // Si no se encuentra ningún alumno, muestra un mensaje
+                $mensaje = "No se encontró ningún alumno con ese criterio de búsqueda.";
+            }
+        } else {
+            $justificaciones = Justificaciones::all();
+        }
         return view('dashboard.justificaciones', compact('justificaciones', 'alumnos', 'profesores'));
     }
 
@@ -49,10 +81,10 @@ class JustificacionesController extends Controller
 
         // dd($request->all());
         Justificaciones::create([
-            'alumno_id' => $request->alumno_id, 
-            'profesor_id' => $request->profesor_id, 
-            'descripcion' => $request->descripcion, 
-            'imagen' => $imagenUrl, 
+            'alumno_id' => $request->alumno_id,
+            'profesor_id' => $request->profesor_id,
+            'descripcion' => $request->descripcion,
+            'imagen' => $imagenUrl,
         ]);
         // Justificaciones::create($request->all());
 
