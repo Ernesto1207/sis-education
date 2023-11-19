@@ -41,7 +41,6 @@ class AsistenciaController extends Controller
             $asistencias = Asistencia::all();
         }
 
-
         // Verifica si el usuario tiene un rol de alumno
         if ($alumnos) {
             $alumnoId = $usuario->alumno->id;
