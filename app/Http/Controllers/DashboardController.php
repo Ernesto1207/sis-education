@@ -23,6 +23,7 @@ class DashboardController extends Controller
         $profesores = profesores::count();
         $cursos = Curso::count();
 
+
         $datos = DB::table('alumnos')
             ->select(DB::raw('MONTH(created_at) as mes'), DB::raw('COUNT(*) as cantidad'))
             ->groupBy(DB::raw('MONTH(created_at)'))
@@ -133,6 +134,7 @@ class DashboardController extends Controller
                     return $curso->dias_semana === $dia6;
                 })->sortBy('horario_entrada');
 
+            $notas = $alumno->notas;
             return view('dashboard', compact(
                 'usuario',
                 'alumnos',
@@ -145,12 +147,12 @@ class DashboardController extends Controller
                 'cursosViernes',
                 'cursosSabado',
                 'datos',
-                'asistenciasCount'
+                'asistenciasCount',
+                'notas'
 
             ));
         }
 
-
-        return view('dashboard', compact('alumnos','alumno', 'profesores', 'cursos', 'datos', 'asistenciasCount'));
+        return view('dashboard', compact('alumnos', 'alumno', 'profesores', 'cursos', 'datos', 'asistenciasCount', 'notas'));
     }
 }
