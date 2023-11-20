@@ -14,6 +14,7 @@ class AsignarController extends Controller
     public function index()
     {
         //
+        // $users = User::all();
         $users = User::oldest()->paginate(10);
         return view('dashboard.userList', compact('users'));
     }
@@ -52,8 +53,7 @@ class AsignarController extends Controller
 
         $roles = Role::all();
 
-        return view('dashboard.userRol', compact('user','roles'));
-
+        return view('dashboard.userRol', compact('user', 'roles'));
     }
 
     /**
@@ -62,11 +62,17 @@ class AsignarController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        
         $user = User::find($id);
 
-        $user->roles()->sync($request-> roles);
+        $user->roles()->sync($request->roles);
+
         
-        return redirect()->route('asignar.edit',$user);
+        $user->password = bcrypt($request->password);
+        $user->save();
+
+        return redirect()->route('asignar.edit', $user);
+        // dd($request->all());
     }
 
     /**
