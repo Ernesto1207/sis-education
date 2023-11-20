@@ -24,34 +24,40 @@
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-6 py-3 text-center">
                         DNI
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-6 py-3 text-center">
                         Nombres
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-6 py-3 text-center">
                         Apellido Paterno
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-6 py-3 text-center">
                         Apellido Materno
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-6 py-3 text-center">
                         Genero
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-6 py-3 text-center">
                         Fecha de Nacimiento
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-6 py-3 text-center">
                         Ciudad
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-6 py-3 text-center">
                         Direccion
                     </th>
-                    <th scope="col text-center" class="px-9 py-3 ">
+                    <th scope="col" class="px-9 py-3  text-center">
                         Estado
                     </th>
-                    <th scope="col" class="px-9 py-3 ">
+                    <th scope="col" class="px-6 py-3 text-center">
+                        Grado
+                    </th>
+                    <th scope="col" class="px-9 py-3  text-center">
+                        Seccion
+                    </th>
+                    <th scope="col" class="px-9 py-3  text-center">
                         Accion
                     </th>
                 </tr>
@@ -64,29 +70,35 @@
                             class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             {{ $alumno->dni }}
                         </th>
-                        <td class="px-6 py-4">
+                        <td class="px-6 py-4 text-center">
                             {{ $alumno->nombres }}
                         </td>
-                        <td class="px-6 py-4">
+                        <td class="px-6 py-4 text-center">
                             {{ $alumno->apellido_paterno }}
                         </td>
-                        <td class="px-6 py-4">
+                        <td class="px-6 py-4 text-center">
                             {{ $alumno->apellido_materno }}
                         </td>
-                        <td class="px-6 py-4">
+                        <td class="px-6 py-4 text-center">
                             {{ $alumno->genero }}
                         </td>
-                        <td class="px-6 py-4">
+                        <td class="px-6 py-4 text-center">
                             {{ $alumno->fecha_nacimiento }}
                         </td>
-                        <td class="px-6 py-4">
+                        <td class="px-6 py-4 text-center">
                             {{ $alumno->ciudad }}
                         </td>
-                        <td class="px-6 py-4">
+                        <td class="px-6 py-4 text-center">
                             {{ $alumno->direccion }}
                         </td>
-                        <td class="px-6 py-4">
+                        <td class="px-6 py-4 text-center">
                             {{ $alumno->estado }}
+                        </td>
+                        <td class="px-6 py-4 text-center">
+                            {{ $alumno->grado }}
+                        </td>
+                        <td class="px-6 py-4 text-center">
+                            {{ $alumno->seccion }}
                         </td>
 
                         <td class="flex items-center px-6 py-4 space-x-3">

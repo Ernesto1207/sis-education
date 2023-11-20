@@ -44,7 +44,7 @@ $fechaMaxima = date('Y-m-d', strtotime('-10 years'));
                         DNI
                     </label>
                     <input class="appearance-none block w-full  bg-transparent border rounded py-3 px-4 mb-3"
-                        type="text" placeholder="Jane" id="dni" name="dni" required>
+                        type="text" placeholder="78945612" id="dni" name="dni" required>
                 </div>
                 <!-- Nombres -->
                 <div class="md:w-1/2 px-3">
@@ -52,9 +52,8 @@ $fechaMaxima = date('Y-m-d', strtotime('-10 years'));
                         Nombres
                     </label>
                     <input class="appearance-none block w-full bg-transparent border rounded py-3 px-4" id="nombres"
-                        name="nombres" type="text" placeholder="Doe" required>
+                        name="nombres" type="text" placeholder="Nombres" required>
                 </div>
-
             </div>
 
             <div class="-mx-3 md:flex mb-6">
@@ -64,7 +63,8 @@ $fechaMaxima = date('Y-m-d', strtotime('-10 years'));
                         Apellido Paterno
                     </label>
                     <input class="appearance-none block w-full bg-transparent border rounded py-3 px-4 mb-3"
-                        id="apellido_paterno" name="apellido_paterno" type="text" placeholder="Jane" required>
+                        id="apellido_paterno" name="apellido_paterno" type="text" placeholder="Apellido Paternone"
+                        required>
                 </div>
 
                 <!-- Apellido Materno -->
@@ -73,7 +73,29 @@ $fechaMaxima = date('Y-m-d', strtotime('-10 years'));
                         Apellido Materno
                     </label>
                     <input class="appearance-none block w-full bg-transparent border rounded py-3 px-4"
-                        id="apellido_materno" name="apellido_materno" type="text" placeholder="Doe">
+                        id="apellido_materno" name="apellido_materno" type="text" placeholder=" Apellido Materno"
+                        required>
+                </div>
+
+            </div>
+
+            <div class="-mx-3 md:flex mb-6">
+                <!-- Grado -->
+                <div class="md:w-1/2 px-3 mb-6 md:mb-0">
+                    <label class="block uppercase tracking-wide  text-xs font-bold mb-2" for="grid-first-name">
+                        Grado
+                    </label>
+                    <input class="appearance-none block w-full bg-transparent border rounded py-3 px-4 mb-3"
+                        id="grado" name="grado" type="text" placeholder="Grado" required>
+                </div>
+
+                <!-- Seccion -->
+                <div class="md:w-1/2 px-3">
+                    <label class="block uppercase tracking-wide  text-xs font-bold mb-2" for="grid-last-name">
+                        Seccion
+                    </label>
+                    <input class="appearance-none block w-full bg-transparent border rounded py-3 px-4" id="seccion"
+                        name="seccion" type="text" placeholder="Seccion">
                 </div>
 
             </div>

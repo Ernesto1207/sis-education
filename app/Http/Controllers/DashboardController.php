@@ -41,6 +41,7 @@ class DashboardController extends Controller
 
         $usuario = Auth::user();
         $alumnos = $usuario->alumno;
+        
         $profesor = $usuario->profesores;
 
         if ($profesor) {
@@ -153,6 +154,6 @@ class DashboardController extends Controller
             ));
         }
 
-        return view('dashboard', compact('alumnos', 'alumno', 'profesores', 'cursos', 'datos', 'asistenciasCount', 'notas'));
+        return view('dashboard', compact('alumnos', 'alumno', 'profesores', 'cursos', 'datos', 'asistenciasCount'));
     }
 }

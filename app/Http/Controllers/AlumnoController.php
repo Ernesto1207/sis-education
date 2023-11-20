@@ -18,7 +18,7 @@ class AlumnoController extends Controller
     public function index(Request $request): View
     {
         //
-        $alumnos = Alumno::with('user')->oldest()->paginate(1);
+        // $alumnos = Alumno::with('user')->oldest()->paginate(1);
 
         $query = $request->input('search');
 
@@ -62,6 +62,8 @@ class AlumnoController extends Controller
             'ciudad' => 'required',
             'direccion' => 'required',
             'estado' => 'required',
+            'grado' => 'required',
+            'seccion' => 'required'
         ]);
         Alumno::create([
             'user_id' => $request->input('user_id'),
@@ -74,6 +76,9 @@ class AlumnoController extends Controller
             'ciudad' => $request->input('ciudad'),
             'direccion' => $request->input('direccion'),
             'estado' => $request->input('estado'),
+            'grado' => $request->input('grado'),
+            'seccion' => $request->input('seccion'),
+
         ]);
         // dd($request->all());
         return redirect()->route('alumnos.index')->with('success', 'Alumno creado exitosamente.');

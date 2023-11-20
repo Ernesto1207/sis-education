@@ -24,6 +24,8 @@ class alumno extends Model
         'ciudad',
         'direccion',
         'estado',
+        'grado',
+        'seccion'
     ];
 
     public function user()
