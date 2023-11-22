@@ -89,7 +89,6 @@ class DashboardController extends Controller
                 'cursosSabado',
                 'datos',
                 'asistenciasCount',
-                'notas'
             ));
         }
         if ($alumnos) {
