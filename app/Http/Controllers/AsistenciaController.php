@@ -83,6 +83,11 @@ class AsistenciaController extends Controller
             return redirect()->back()->with('error', 'El alumno no existe');
         }
 
+        // Verificar si el alumno está activo
+        if ($alumno->estado === 'Inactivo') {
+            return redirect()->back()->with('error', 'El alumno está inactivo. No se puede registrar asistencia.');
+        }
+
         // Buscar si ya hay una asistencia registrada para el alumno en la fecha actual
         $asistenciaExistente = Asistencia::where('alumno_id', $alumno->id)
             ->whereDate('fecha', $fecha_actual)
